@@ -28,6 +28,8 @@
             --input-bg: rgba(30, 41, 59, 0.5);
             --code-bg: rgba(30, 41, 59, 0.8);
             --glass-border: rgba(255, 255, 255, 0.1);
+            --instagram-color: #E1306C;
+            --instagram-gradient: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
         }
 
         * {
@@ -75,7 +77,7 @@
         .floating-bg div {
             position: absolute;
             border-radius: 50%;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            background: var(--instagram-gradient);
             filter: blur(40px);
             animation: float 15s infinite ease-in-out;
         }
@@ -164,7 +166,7 @@
             gap: 12px;
             text-transform: uppercase;
             letter-spacing: 1px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: var(--instagram-gradient);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -174,24 +176,24 @@
 
         .logo:hover {
             transform: translateY(-2px);
-            text-shadow: 0 5px 15px rgba(139, 92, 246, 0.3);
+            text-shadow: 0 5px 15px rgba(225, 48, 108, 0.3);
         }
 
         .logo-icon {
             width: 32px;
             height: 32px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: var(--instagram-gradient);
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+            box-shadow: 0 4px 12px rgba(225, 48, 108, 0.4);
             transition: all 0.3s ease;
         }
 
         .logo:hover .logo-icon {
             transform: rotate(15deg) scale(1.1);
-            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6);
+            box-shadow: 0 6px 20px rgba(225, 48, 108, 0.6);
         }
 
         .desktop-nav {
@@ -219,7 +221,7 @@
             transform: translateX(-50%);
             width: 0;
             height: 2px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            background: var(--instagram-gradient);
             border-radius: 1px;
             transition: width 0.3s ease;
         }
@@ -262,9 +264,9 @@
         }
 
         .mobile-toggle:hover {
-            background: linear-gradient(135deg, var(--primary) 20%, var(--secondary) 100%);
+            background: var(--instagram-gradient);
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
+            box-shadow: 0 8px 25px rgba(225, 48, 108, 0.3);
         }
 
         .mobile-toggle:active {
@@ -313,10 +315,10 @@
         }
 
         .mobile-link:hover {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: var(--instagram-gradient);
             color: white;
             transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 12px 40px rgba(139, 92, 246, 0.4);
+            box-shadow: 0 12px 40px rgba(225, 48, 108, 0.4);
             border-color: transparent;
         }
 
@@ -397,7 +399,7 @@
             gap: 16px;
             padding-bottom: 16px;
             border-bottom: 2px solid var(--glass-border);
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: var(--instagram-gradient);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -411,7 +413,7 @@
             left: 0;
             width: 60px;
             height: 2px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            background: var(--instagram-gradient);
             border-radius: 1px;
         }
 
@@ -457,7 +459,7 @@
         .btn-primary {
             width: 100%;
             padding: 18px 24px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: var(--instagram-gradient);
             color: white;
             border-radius: 14px;
             font-family: 'Space Grotesk', sans-serif;
@@ -474,7 +476,7 @@
             position: relative;
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(139, 92, 246, 0.3);
+            box-shadow: 0 8px 32px rgba(225, 48, 108, 0.3);
         }
 
         .btn-primary::before {
@@ -495,14 +497,14 @@
         .btn-primary:hover {
             transform: translateY(-4px);
             box-shadow: 
-                0 16px 48px rgba(139, 92, 246, 0.5),
+                0 16px 48px rgba(225, 48, 108, 0.5),
                 0 8px 24px rgba(16, 185, 129, 0.4);
             letter-spacing: 1.5px;
         }
 
         .btn-primary:active {
             transform: translateY(-1px);
-            box-shadow: 0 8px 32px rgba(139, 92, 246, 0.3);
+            box-shadow: 0 8px 32px rgba(225, 48, 108, 0.3);
         }
 
         .btn-primary:disabled {
@@ -561,15 +563,15 @@
             position: absolute;
             top: -12px;
             right: 24px;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            background: var(--instagram-gradient);
             padding: 8px 20px;
             border-radius: 20px;
             font-size: 0.9rem;
             font-weight: 700;
-            box-shadow: 0 6px 24px rgba(245, 158, 11, 0.4);
+            box-shadow: 0 6px 24px rgba(225, 48, 108, 0.4);
             transform: rotate(3deg);
             z-index: 2;
-            color: #1e1b4b;
+            color: white;
             border: 1px solid rgba(255, 255, 255, 0.3);
             font-family: 'Space Grotesk', sans-serif;
             letter-spacing: 0.5px;
@@ -665,10 +667,10 @@
             } 
         }
 
-        .yt-btn {
+        .ig-btn {
             width: 100%;
             padding: 18px;
-            background: linear-gradient(135deg, #FF0000 0%, #FF4747 100%);
+            background: var(--instagram-gradient);
             color: white;
             border-radius: 14px;
             font-family: 'Space Grotesk', sans-serif;
@@ -682,14 +684,14 @@
             gap: 12px;
             margin-bottom: 1.5rem;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(255, 0, 0, 0.2);
+            box-shadow: 0 8px 32px rgba(225, 48, 108, 0.2);
             position: relative;
             overflow: hidden;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        .yt-btn::before {
+        .ig-btn::before {
             content: '';
             position: absolute;
             top: 0;
@@ -700,17 +702,17 @@
             transition: left 0.6s ease;
         }
 
-        .yt-btn:hover::before {
+        .ig-btn:hover::before {
             left: 100%;
         }
 
-        .yt-btn:hover {
+        .ig-btn:hover {
             transform: translateY(-4px);
-            box-shadow: 0 16px 48px rgba(255, 0, 0, 0.3);
+            box-shadow: 0 16px 48px rgba(225, 48, 108, 0.3);
             letter-spacing: 1.2px;
         }
 
-        .yt-btn:active {
+        .ig-btn:active {
             transform: translateY(-1px);
         }
 
@@ -808,13 +810,27 @@
             font-weight: 500;
         }
 
+        .api-rotation-info {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(139, 92, 246, 0.1);
+            border-radius: 12px;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .api-rotation-info strong {
+            color: var(--primary);
+        }
+
         /* Custom Icons (SVG Embedded) */
         .icon-zap {
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%238b5cf6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='13 2 3 14 12 14 11 22 21 10 12 10 13 2'%3E%3C/polygon%3E%3C/svg%3E");
         }
 
-        .icon-youtube {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23FF0000'%3E%3Cpath d='M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z'%3E%3C/path%3E%3C/svg%3E");
+        .icon-instagram {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23E1306C'%3E%3Cpath d='M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z'/%3E%3C/svg%3E");
         }
 
         .icon-heart {
@@ -843,6 +859,10 @@
 
         .icon-x {
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23cbd5e1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E");
+        }
+
+        .icon-api {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%238b5cf6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cline x1='2' y1='12' x2='22' y2='12'%3E%3C/line%3E%3Cpath d='M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z'%3E%3C/path%3E%3C/svg%3E");
         }
 
         @media(min-width: 768px) {
@@ -906,7 +926,7 @@
     <main class="main-content">
         
         <section id="reactor" class="card">
-            <div class="badge">V2.1.0</div>
+            <div class="badge">V2.2.0</div>
             <h1 class="card-title">
                 <div class="icon icon-zap icon-lg"></div>
                 Reactor Tool
@@ -914,9 +934,9 @@
 
             <!-- Verifikasi Section -->
             <div id="verificationSection">
-                <button id="verifyBtn" class="yt-btn">
-                    <div class="icon icon-youtube icon-lg"></div>
-                    <span id="verifyText">Verifikasi YouTube untuk React</span>
+                <button id="verifyBtn" class="ig-btn">
+                    <div class="icon icon-instagram icon-lg"></div>
+                    <span id="verifyText">Verifikasi Instagram untuk React</span>
                 </button>
                 
                 <div id="verifiedBadge" class="verified-badge" style="display: none;">
@@ -925,7 +945,11 @@
                 </div>
                 
                 <div class="verification-info">
-                    <p>Ikuti Ig admin kami untuk mengaktifkan Reactor</p>
+                    <p>Ikuti Instagram admin kami untuk mengaktifkan Reactor</p>
+                </div>
+                
+                <div class="api-rotation-info">
+                    <strong>Sistem Rotasi API:</strong> Setiap pengguna mendapatkan API yang berbeda secara acak. Sistem otomatis beralih jika API habis.
                 </div>
             </div>
 
@@ -986,9 +1010,14 @@ curl -X GET \<br>
 -H "x-api-key: {YOUR_API_KEY}"
             </div>
             <div style="margin-top: 1.5rem; padding: 1.2rem; background: var(--input-bg); border-radius: 12px; border: 1px solid var(--glass-border); backdrop-filter: blur(10px);">
-                <h4 style="margin-bottom: 12px; color: var(--text-main); font-family: 'Space Grotesk', sans-serif;">API Rotation System</h4>
+                <h4 style="margin-bottom: 12px; color: var(--text-main); font-family: 'Space Grotesk', sans-serif;">
+                    <div class="icon icon-api" style="vertical-align: middle; margin-right: 8px;"></div>
+                    API Rotation System
+                </h4>
                 <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5;">
-                    Sistem memiliki 3 API key yang akan digunakan secara bergantian. Jika API 1 habis/error, sistem otomatis beralih ke API 2, kemudian API 3.
+                    <strong>3 API Keys:</strong><br>
+                    
+                    Sistem otomatis memilih API secara acak untuk setiap sesi pengguna. Jika satu API habis/error, sistem beralih ke API berikutnya.
                 </p>
             </div>
         </section>
@@ -999,7 +1028,7 @@ curl -X GET \<br>
         <div class="footer-content">
             &copy; 2025 Harits Strom. All rights reserved.
             <div style="margin-top: 10px; font-size: 0.8rem; opacity: 0.7; letter-spacing: 0.3px;">
-                WA Channel Reactor Pro - Automated Reaction Tool
+                WA Channel Reactor Pro - Automated Reaction Tool v2.2.0
             </div>
         </div>
     </footer>
@@ -1025,27 +1054,32 @@ curl -X GET \<br>
             header: document.getElementById('header')
         };
 
-        // Configuration
+        // Configuration - Updated API Keys
         const config = {
             API_KEYS: [
                 "f2b6e44afe54428b29f3b231fec7d0eaf403a713ef7a0ebb7cd5df00e4980e64",
-                "f2b6e44afe54428b29f3b231fec7d0eaf403a713ef7a0ebb7cd5df00e4980e64",
-                "de41e346fb490e7da55589cf9b44d526dfd9d957c0178ea6a83fa711af109411"
+                "de41e346fb490e7da55589cf9b44d526dfd9d957c0178ea6a83fa711af109411",
+                "4a84cb8538c876d41eb0e4c8126a1aafb1ba787c1eaa8612662f616515514be3"
             ],
-            YOUTUBE_URL: "https://www.instagram.com/ritzxza?igsh=d21maDEwYmZsZXlq",
-            YOUTUBE_CHANNEL: "Frox Strom"
+            INSTAGRAM_URL: "https://www.instagram.com/ritzxza?igsh=d21maDEwYmZsZXlq",
+            INSTAGRAM_ACCOUNT: "@ritzxza"
         };
 
         // State variables
         let isMenuOpen = false;
-        let isVerified = localStorage.getItem('ytVerified') === 'true';
+        let isVerified = localStorage.getItem('igVerified') === 'true';
         let currentApiIndex = 0;
         let isProcessing = false;
+        let sessionApiIndex = null; // API index khusus untuk sesi ini
 
         // Initialize
         init();
 
         function init() {
+            // Generate random API index for this session
+            sessionApiIndex = Math.floor(Math.random() * config.API_KEYS.length);
+            currentApiIndex = sessionApiIndex;
+            
             // Check verification status
             if (isVerified) {
                 enableReactor();
@@ -1060,7 +1094,17 @@ curl -X GET \<br>
             window.addEventListener('scroll', handleScroll);
 
             // Update API status
-            updateApiStatus('active', 'Menggunakan API 1 (Active)');
+            updateApiStatus('active', `Menggunakan API ${currentApiIndex + 1} (Sesi ${getSessionId()})`);
+        }
+
+        function getSessionId() {
+            // Generate a simple session ID based on random number
+            let sessionId = localStorage.getItem('reactorSessionId');
+            if (!sessionId) {
+                sessionId = Math.random().toString(36).substr(2, 9);
+                localStorage.setItem('reactorSessionId', sessionId);
+            }
+            return sessionId;
         }
 
         function setupEventListeners() {
@@ -1068,7 +1112,7 @@ curl -X GET \<br>
             els.menuBtn.addEventListener('click', toggleMenu);
             document.querySelectorAll('.js-nav').forEach(l => l.addEventListener('click', toggleMenu));
 
-            // YouTube verification
+            // Instagram verification
             els.verifyBtn.addEventListener('click', handleVerification);
 
             // Form submission
@@ -1094,8 +1138,8 @@ curl -X GET \<br>
         }
 
         function handleVerification() {
-            // Open YouTube in new tab
-            window.open(config.YOUTUBE_URL, '_blank');
+            // Open Instagram in new tab
+            window.open(config.INSTAGRAM_URL, '_blank');
             
             // Show loading state
             els.verifyText.textContent = "Memverifikasi...";
@@ -1127,7 +1171,7 @@ curl -X GET \<br>
             modal.innerHTML = `
                 <div style="
                     background: rgba(15, 23, 42, 0.95);
-                    border: 1px solid rgba(139, 92, 246, 0.3);
+                    border: 1px solid rgba(225, 48, 108, 0.3);
                     border-radius: 20px;
                     padding: 2rem;
                     max-width: 400px;
@@ -1136,22 +1180,25 @@ curl -X GET \<br>
                     backdrop-filter: blur(20px);
                     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
                 ">
+                    <div style="margin-bottom: 1rem;">
+                        <div class="icon icon-instagram icon-lg" style="margin: 0 auto;"></div>
+                    </div>
                     <h3 style="
                         color: var(--text-main);
                         margin-bottom: 1rem;
                         font-family: 'Space Grotesk', sans-serif;
-                    ">Verifikasi YouTube</h3>
+                    ">Verifikasi Instagram</h3>
                     <p style="
                         color: var(--text-secondary);
                         margin-bottom: 1.5rem;
                         line-height: 1.5;
                     ">
-                        Apakah Anda sudah Follow Ig admin kami? <strong>${config.YOUTUBE_CHANNEL}</strong>?
+                        Apakah Anda sudah Follow Instagram admin kami? <strong>${config.INSTAGRAM_ACCOUNT}</strong>?
                     </p>
                     <div style="display: flex; gap: 1rem; justify-content: center;">
                         <button id="confirmYes" style="
                             padding: 12px 24px;
-                            background: linear-gradient(135deg, var(--success), var(--secondary));
+                            background: var(--instagram-gradient);
                             color: white;
                             border: none;
                             border-radius: 10px;
@@ -1199,7 +1246,7 @@ curl -X GET \<br>
 
         function verifySuccess() {
             isVerified = true;
-            localStorage.setItem('ytVerified', 'true');
+            localStorage.setItem('igVerified', 'true');
             enableReactor();
             
             // Update UI
@@ -1211,11 +1258,11 @@ curl -X GET \<br>
 
         function verifyFailed() {
             // Reset button state
-            els.verifyText.textContent = "Verifikasi Follow Ig admin untuk React";
+            els.verifyText.textContent = "Verifikasi Instagram untuk React";
             els.verifyBtn.disabled = false;
-            els.verifyBtn.innerHTML = '<div class="icon icon-youtube icon-lg"></div><span>Verifikasi YouTube untuk React</span>';
+            els.verifyBtn.innerHTML = '<div class="icon icon-instagram icon-lg"></div><span>Verifikasi Instagram untuk React</span>';
             
-            showStatus('error', 'Silakan subscribe channel YouTube kami terlebih dahulu.');
+            showStatus('error', 'Silakan follow Instagram admin kami terlebih dahulu.');
         }
 
         function enableReactor() {
@@ -1247,6 +1294,7 @@ curl -X GET \<br>
         }
 
         function rotateApiKey() {
+            // Try next API key
             currentApiIndex = (currentApiIndex + 1) % config.API_KEYS.length;
             const apiNumber = currentApiIndex + 1;
             
@@ -1274,7 +1322,7 @@ curl -X GET \<br>
             e.preventDefault();
             
             if (!isVerified) {
-                showStatus('error', 'Harap verifikasi YouTube terlebih dahulu!');
+                showStatus('error', 'Harap verifikasi Instagram terlebih dahulu!');
                 return;
             }
             
@@ -1293,7 +1341,7 @@ curl -X GET \<br>
             els.btnText.textContent = "Processing...";
             els.statusArea.style.display = 'none';
 
-            // Try API call
+            // Try API call with current session API
             await tryApiCall(link, emoji, 0);
             
             // Reset processing state
@@ -1314,18 +1362,26 @@ curl -X GET \<br>
             try {
                 const url = `https://react.whyux-xec.my.id/api/rch?link=${encodeURIComponent(link)}&emoji=${encodeURIComponent(emoji)}`;
                 
+                console.log(`Menggunakan API ${apiNumber}: ${currentApiKey.substring(0, 20)}...`);
+                
                 const response = await fetch(url, {
                     method: "GET",
                     headers: {
                         "x-api-key": currentApiKey,
-                        "Accept": "application/json"
+                        "Accept": "application/json",
+                        "User-Agent": `WAReactor/${getSessionId()}`
                     }
                 });
                 
                 if (response.ok) {
-                    showStatus('success', '✅ Reaction Sent Successfully!');
-                    els.form.reset();
-                    updateApiStatus('active', `Menggunakan API ${apiNumber} (Active)`);
+                    const data = await response.json();
+                    if (data.success) {
+                        showStatus('success', '✅ Reaction Sent Successfully!');
+                        els.form.reset();
+                        updateApiStatus('active', `Menggunakan API ${apiNumber} (Success)`);
+                    } else {
+                        showStatus('error', `Failed: ${data.message || 'Unknown error'}`);
+                    }
                 } else if (response.status === 429 || response.status === 403) {
                     // Rate limit or forbidden, rotate API
                     showStatus('warning', `API ${apiNumber} limit, beralih ke API berikutnya...`);
@@ -1333,7 +1389,11 @@ curl -X GET \<br>
                     setTimeout(() => tryApiCall(link, emoji, attempt + 1), 1000);
                     return;
                 } else {
-                    showStatus('error', 'Failed to Send Reaction');
+                    showStatus('error', `API Error: Status ${response.status}`);
+                    // Try next API
+                    rotateApiKey();
+                    setTimeout(() => tryApiCall(link, emoji, attempt + 1), 1000);
+                    return;
                 }
             } catch (error) {
                 console.error('API Error:', error);
