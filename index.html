@@ -3,33 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WA Channel Reactor - V2.1.0</title>
+    <title>WA Channel Reactor Pro - V3.0</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
         :root {
-            --bg-gradient-start: #0f172a;
-            --bg-gradient-end: #1e1b4b;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --card-border: rgba(139, 92, 246, 0.3);
-            --primary: #8b5cf6;
-            --primary-light: #a78bfa;
-            --primary-glow: rgba(139, 92, 246, 0.3);
+            --bg-gradient-start: #0a0a0f;
+            --bg-gradient-end: #1a1a2e;
+            --card-bg: rgba(25, 25, 40, 0.85);
+            --card-border: rgba(99, 102, 241, 0.2);
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --primary-dark: #4f46e5;
+            --primary-glow: rgba(99, 102, 241, 0.25);
             --secondary: #10b981;
             --secondary-light: #34d399;
             --accent: #f59e0b;
             --accent-light: #fbbf24;
             --text-main: #f8fafc;
-            --text-secondary: #cbd5e1;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
             --error: #ef4444;
             --success: #10b981;
-            --shadow-color: rgba(0, 0, 0, 0.3);
-            --nav-bg: rgba(15, 23, 42, 0.9);
-            --input-bg: rgba(30, 41, 59, 0.5);
-            --code-bg: rgba(30, 41, 59, 0.8);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --instagram-color: #E1306C;
+            --warning: #f59e0b;
+            --nav-bg: rgba(10, 10, 15, 0.92);
+            --input-bg: rgba(30, 41, 59, 0.4);
+            --code-bg: rgba(15, 23, 42, 0.9);
+            --glass-border: rgba(255, 255, 255, 0.08);
             --instagram-gradient: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+            --purple-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --green-gradient: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+            --red-gradient: linear-gradient(135deg, #ef4444 0%, #f87171 100%);
+            --blue-gradient: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.2);
+            --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.1);
         }
 
         * {
@@ -39,12 +47,29 @@
             -webkit-tap-highlight-color: transparent;
         }
 
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-light);
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
             color: var(--text-main);
             min-height: 100vh;
-            background-attachment: fixed;
             position: relative;
             overflow-x: hidden;
         }
@@ -57,78 +82,82 @@
             width: 100%;
             height: 100%;
             background: 
-                radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.15) 0%, transparent 25%),
-                radial-gradient(circle at 80% 70%, rgba(16, 185, 129, 0.15) 0%, transparent 25%),
-                radial-gradient(circle at 40% 80%, rgba(245, 158, 11, 0.1) 0%, transparent 20%);
+                radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.15) 0%, transparent 30%),
+                radial-gradient(circle at 80% 70%, rgba(16, 185, 129, 0.15) 0%, transparent 30%),
+                radial-gradient(circle at 40% 80%, rgba(245, 158, 11, 0.1) 0%, transparent 25%);
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .bg-noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
             z-index: -1;
             pointer-events: none;
         }
 
-        .floating-bg {
+        .floating-elements {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
-            opacity: 0.1;
+            pointer-events: none;
         }
 
-        .floating-bg div {
+        .floating-element {
             position: absolute;
             border-radius: 50%;
-            background: var(--instagram-gradient);
-            filter: blur(40px);
-            animation: float 15s infinite ease-in-out;
+            filter: blur(60px);
+            opacity: 0.15;
+            animation: float 20s infinite ease-in-out;
         }
 
-        .floating-bg div:nth-child(1) {
+        .floating-element:nth-child(1) {
             width: 400px;
             height: 400px;
             top: 10%;
-            left: 10%;
+            left: 5%;
+            background: var(--primary);
             animation-delay: 0s;
         }
 
-        .floating-bg div:nth-child(2) {
+        .floating-element:nth-child(2) {
             width: 300px;
             height: 300px;
             top: 60%;
-            right: 10%;
+            right: 5%;
+            background: var(--secondary);
             animation-delay: 5s;
         }
 
-        .floating-bg div:nth-child(3) {
+        .floating-element:nth-child(3) {
             width: 250px;
             height: 250px;
             bottom: 20%;
-            left: 20%;
+            left: 15%;
+            background: var(--accent);
             animation-delay: 10s;
         }
 
         @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(30px, 50px) scale(1.1); }
-            66% { transform: translate(-20px, -30px) scale(0.9); }
+            0%, 100% { 
+                transform: translate(0, 0) scale(1) rotate(0deg); 
+            }
+            33% { 
+                transform: translate(30px, 40px) scale(1.05) rotate(120deg); 
+            }
+            66% { 
+                transform: translate(-20px, -20px) scale(0.95) rotate(240deg); 
+            }
         }
 
-        a { text-decoration: none; color: inherit; }
-        button { cursor: pointer; border: none; background: none; }
-        
-        .icon {
-            width: 24px;
-            height: 24px;
-            display: inline-block;
-            vertical-align: middle;
-            transition: all 0.3s ease;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-        }
-
-        .icon-lg {
-            width: 32px;
-            height: 32px;
-        }
-
+        /* Header */
         .header {
             position: fixed;
             top: 0;
@@ -139,19 +168,19 @@
             -webkit-backdrop-filter: blur(20px) saturate(180%);
             border-bottom: 1px solid var(--glass-border);
             z-index: 1000;
-            padding: 0.875rem 0;
-            transition: all 0.3s ease;
+            padding: 0.75rem 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .header.scrolled {
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            padding: 0.75rem 0;
+            box-shadow: var(--shadow-md);
+            padding: 0.5rem 0;
         }
 
         .nav-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 0 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -165,50 +194,57 @@
             align-items: center;
             gap: 12px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            background: var(--instagram-gradient);
+            letter-spacing: 2px;
+            background: var(--purple-gradient);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             transition: all 0.3s ease;
-            padding: 8px 0;
+            padding: 0.5rem 0;
         }
 
         .logo:hover {
             transform: translateY(-2px);
-            text-shadow: 0 5px 15px rgba(225, 48, 108, 0.3);
+            filter: drop-shadow(0 5px 15px rgba(99, 102, 241, 0.3));
         }
 
         .logo-icon {
-            width: 32px;
-            height: 32px;
-            background: var(--instagram-gradient);
-            border-radius: 8px;
+            width: 40px;
+            height: 40px;
+            background: var(--purple-gradient);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 12px rgba(225, 48, 108, 0.4);
-            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(99, 102, 241, 0.4);
+            transition: all 0.4s ease;
+        }
+
+        .logo-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
         }
 
         .logo:hover .logo-icon {
             transform: rotate(15deg) scale(1.1);
-            box-shadow: 0 6px 20px rgba(225, 48, 108, 0.6);
+            box-shadow: 0 12px 40px rgba(99, 102, 241, 0.6);
         }
 
+        /* Navigation */
         .desktop-nav {
             display: none;
-            gap: 32px;
+            gap: 2.5rem;
             font-weight: 600;
             font-family: 'Space Grotesk', sans-serif;
             text-transform: uppercase;
-            font-size: 0.95rem;
-            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
         }
 
         .desktop-nav a {
             position: relative;
-            padding: 8px 0;
+            padding: 0.5rem 0;
             color: var(--text-secondary);
             transition: all 0.3s ease;
         }
@@ -221,8 +257,8 @@
             transform: translateX(-50%);
             width: 0;
             height: 2px;
-            background: var(--instagram-gradient);
-            border-radius: 1px;
+            background: var(--purple-gradient);
+            border-radius: 2px;
             transition: width 0.3s ease;
         }
 
@@ -234,6 +270,7 @@
             width: 100%;
         }
 
+        /* Mobile Menu */
         .mobile-toggle {
             display: flex;
             align-items: center;
@@ -248,43 +285,24 @@
             overflow: hidden;
         }
 
-        .mobile-toggle::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .mobile-toggle:hover::before {
-            left: 100%;
-        }
-
         .mobile-toggle:hover {
-            background: var(--instagram-gradient);
+            background: var(--primary);
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(225, 48, 108, 0.3);
-        }
-
-        .mobile-toggle:active {
-            transform: translateY(0);
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
         }
 
         .mobile-menu {
             position: fixed;
             inset: 0;
-            background: rgba(15, 23, 42, 0.95);
+            background: rgba(10, 10, 15, 0.98);
             backdrop-filter: blur(30px);
             -webkit-backdrop-filter: blur(30px);
-            z-index: 900;
+            z-index: 999;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            gap: 28px;
+            gap: 1.5rem;
             opacity: 0;
             visibility: hidden;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -299,39 +317,41 @@
 
         .mobile-link {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 2rem;
+            font-size: 1.75rem;
             font-weight: 700;
-            text-transform: uppercase;
             position: relative;
-            padding: 16px 32px;
+            padding: 1rem 2rem;
             border-radius: 16px;
             transition: all 0.3s ease;
-            background: linear-gradient(135deg, transparent, var(--input-bg));
+            background: var(--input-bg);
             border: 1px solid var(--glass-border);
             color: var(--text-secondary);
-            min-width: 280px;
+            width: 280px;
             text-align: center;
             letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .mobile-link:hover {
-            background: var(--instagram-gradient);
+            background: var(--purple-gradient);
             color: white;
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 12px 40px rgba(225, 48, 108, 0.4);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
             border-color: transparent;
         }
 
+        /* Main Content */
         .main-content {
             width: 100%;
-            max-width: 800px;
-            margin: 120px auto 60px;
-            padding: 0 24px;
+            max-width: 900px;
+            margin: 100px auto 60px;
+            padding: 0 2rem;
             display: flex;
             flex-direction: column;
-            gap: 32px;
+            gap: 2rem;
         }
 
+        /* Card */
         .card {
             background: var(--card-bg);
             border: 1px solid var(--glass-border);
@@ -340,10 +360,7 @@
             position: relative;
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
-            box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.1),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1),
-                inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+            box-shadow: var(--shadow-md);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             overflow: hidden;
         }
@@ -363,28 +380,10 @@
             );
         }
 
-        .card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, 
-                rgba(139, 92, 246, 0.05) 0%,
-                transparent 30%,
-                rgba(16, 185, 129, 0.05) 100%
-            );
-            pointer-events: none;
-        }
-
         .card:hover {
             transform: translateY(-8px);
-            box-shadow: 
-                0 20px 60px rgba(0, 0, 0, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.15),
-                inset 0 -1px 0 rgba(255, 255, 255, 0.08);
-            border-color: rgba(139, 92, 246, 0.4);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(99, 102, 241, 0.3);
         }
 
         .card-title {
@@ -396,10 +395,10 @@
             letter-spacing: -0.5px;
             display: flex;
             align-items: center;
-            gap: 16px;
-            padding-bottom: 16px;
+            gap: 1rem;
+            padding-bottom: 1rem;
             border-bottom: 2px solid var(--glass-border);
-            background: var(--instagram-gradient);
+            background: var(--purple-gradient);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -411,34 +410,54 @@
             position: absolute;
             bottom: -2px;
             left: 0;
-            width: 60px;
+            width: 80px;
             height: 2px;
-            background: var(--instagram-gradient);
+            background: var(--purple-gradient);
             border-radius: 1px;
         }
 
-        .input-group { 
-            margin-bottom: 1.75rem;
-            position: relative;
+        /* Badge */
+        .badge {
+            position: absolute;
+            top: -12px;
+            right: 2rem;
+            background: var(--purple-gradient);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            box-shadow: 0 8px 32px rgba(99, 102, 241, 0.4);
+            transform: rotate(3deg);
+            z-index: 2;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
-        label {
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 1.75rem;
+        }
+
+        .form-label {
             display: block;
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-bottom: 0.75rem;
             font-size: 0.9rem;
             text-transform: uppercase;
-            letter-spacing: 0.8px;
+            letter-spacing: 1px;
             color: var(--text-secondary);
             font-family: 'Space Grotesk', sans-serif;
         }
 
-        input {
+        .form-input {
             width: 100%;
-            padding: 16px 20px;
+            padding: 1rem 1.25rem;
             background: var(--input-bg);
             border: 1px solid var(--glass-border);
-            border-radius: 14px;
+            border-radius: 12px;
             font-family: 'Inter', sans-serif;
             font-size: 1rem;
             color: var(--text-main);
@@ -447,64 +466,46 @@
             backdrop-filter: blur(10px);
         }
 
-        input:focus {
+        .form-input:focus {
             border-color: var(--primary);
             box-shadow: 
                 0 0 0 4px var(--primary-glow),
-                0 8px 32px rgba(139, 92, 246, 0.25);
+                var(--shadow-sm);
             transform: translateY(-2px);
-            background: rgba(30, 41, 59, 0.7);
+            background: rgba(30, 41, 59, 0.6);
         }
 
-        .btn-primary {
-            width: 100%;
-            padding: 18px 24px;
-            background: var(--instagram-gradient);
-            color: white;
-            border-radius: 14px;
+        /* Buttons */
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 12px;
             font-family: 'Space Grotesk', sans-serif;
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1rem;
             cursor: pointer;
             text-transform: uppercase;
-            letter-spacing: 1.2px;
+            letter-spacing: 1px;
             transition: all 0.3s ease;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 12px;
+            gap: 0.75rem;
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(225, 48, 108, 0.3);
+            border: none;
         }
 
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
+        .btn-primary {
             width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .btn-primary:hover::before {
-            left: 100%;
+            background: var(--purple-gradient);
+            color: white;
+            box-shadow: 0 8px 32px rgba(99, 102, 241, 0.3);
         }
 
         .btn-primary:hover {
             transform: translateY(-4px);
-            box-shadow: 
-                0 16px 48px rgba(225, 48, 108, 0.5),
-                0 8px 24px rgba(16, 185, 129, 0.4);
-            letter-spacing: 1.5px;
-        }
-
-        .btn-primary:active {
-            transform: translateY(-1px);
-            box-shadow: 0 8px 32px rgba(225, 48, 108, 0.3);
+            box-shadow: 0 16px 48px rgba(99, 102, 241, 0.4);
+            letter-spacing: 1.2px;
         }
 
         .btn-primary:disabled {
@@ -515,140 +516,404 @@
             opacity: 0.7;
         }
 
-        .btn-primary:disabled:hover::before {
-            left: -100%;
-        }
-
-        .status-area {
-            margin-top: 1.5rem;
-            padding: 1.2rem;
-            border-radius: 14px;
-            font-weight: 600;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            display: none;
-            border: 1px solid;
-            backdrop-filter: blur(10px);
-            font-family: 'Space Grotesk', sans-serif;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px) scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        .status-success { 
-            background: rgba(16, 185, 129, 0.15);
-            border-color: rgba(16, 185, 129, 0.3);
-            color: var(--success);
-            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.1);
-        }
-
-        .status-error { 
-            background: rgba(239, 68, 68, 0.15);
-            border-color: rgba(239, 68, 68, 0.3);
-            color: var(--error);
-            box-shadow: 0 4px 20px rgba(239, 68, 68, 0.1);
-        }
-
-        .badge {
-            position: absolute;
-            top: -12px;
-            right: 24px;
+        .btn-instagram {
+            width: 100%;
             background: var(--instagram-gradient);
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            box-shadow: 0 6px 24px rgba(225, 48, 108, 0.4);
-            transform: rotate(3deg);
-            z-index: 2;
             color: white;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(225, 48, 108, 0.2);
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-instagram:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(225, 48, 108, 0.3);
+        }
+
+        /* Verified Badge */
+        .verified-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            padding: 1rem;
+            border-radius: 12px;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(16, 185, 129, 0.2);
             font-family: 'Space Grotesk', sans-serif;
             letter-spacing: 0.5px;
             text-transform: uppercase;
+            animation: pulseSuccess 2s infinite;
         }
 
-        .badge::after {
-            content: '';
-            position: absolute;
-            inset: 1px;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), transparent);
-            border-radius: inherit;
-            z-index: -1;
+        @keyframes pulseSuccess {
+            0%, 100% { 
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+                transform: scale(1.02);
+            }
         }
 
-        .qris-img {
-            width: 100%;
-            max-width: 300px;
-            display: block;
-            margin: 0 auto;
+        /* CAPTCHA Section - DIPERBAIKI */
+        .captcha-container {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: var(--input-bg);
             border-radius: 16px;
             border: 1px solid var(--glass-border);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .captcha-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            color: var(--text-main);
+            font-size: 1.1rem;
+        }
+
+        .captcha-challenge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 12px;
+            border: 2px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .captcha-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .captcha-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 8px;
+            color: var(--text-main);
+            padding: 1rem 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            user-select: none;
+            min-width: 280px;
+            text-align: center;
+            border: 2px solid var(--primary);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .captcha-input-wrapper {
+            position: relative;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .captcha-input {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--glass-border);
+            border-radius: 12px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.25rem;
+            color: var(--text-main);
+            outline: none;
+            transition: all 0.3s ease;
+            text-align: center;
+            letter-spacing: 3px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .captcha-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px var(--primary-glow);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .captcha-input.correct {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .captcha-input.error {
+            border-color: var(--error);
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .captcha-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .captcha-btn {
+            flex: 1;
+            padding: 0.875rem;
+            border-radius: 10px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .captcha-refresh {
+            background: transparent;
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .captcha-refresh:hover {
+            background: rgba(99, 102, 241, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .captcha-verify {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .captcha-verify:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+        }
+
+        .captcha-verify:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .captcha-verified {
+            background: var(--green-gradient) !important;
+            border-color: var(--secondary) !important;
+            cursor: default !important;
+        }
+
+        .captcha-error {
+            color: var(--error);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            text-align: center;
+            display: none;
+            font-weight: 600;
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        /* Toast Notifications */
+        .toast-container {
+            position: fixed;
+            top: 100px;
+            right: 2rem;
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            max-width: 400px;
+        }
+
+        .toast {
+            padding: 1.25rem;
+            border-radius: 16px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            animation: slideInRight 0.3s ease, fadeOut 0.3s ease 4.7s forwards;
+            box-shadow: var(--shadow-md);
+            max-width: 400px;
+        }
+
+        .toast.success {
+            background: rgba(16, 185, 129, 0.15);
+            border-color: rgba(16, 185, 129, 0.3);
+            color: var(--success);
+        }
+
+        .toast.error {
+            background: rgba(239, 68, 68, 0.15);
+            border-color: rgba(239, 68, 68, 0.3);
+            color: var(--error);
+        }
+
+        .toast.info {
+            background: rgba(59, 130, 246, 0.15);
+            border-color: rgba(59, 130, 246, 0.3);
+            color: #60a5fa;
+        }
+
+        .toast-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .toast-content {
+            flex: 1;
+        }
+
+        .toast-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .toast-message {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 100%;
+            background: currentColor;
+            animation: progress 5s linear forwards;
+            transform-origin: left;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes progress {
+            from { transform: scaleX(1); }
+            to { transform: scaleX(0); }
+        }
+
+        /* Donation Section - DIPERBAIKI */
+        .donation-content {
+            text-align: center;
+        }
+
+        .donation-image {
+            width: 100%;
+            max-width: 320px;
+            margin: 1.5rem auto;
+            border-radius: 16px;
+            border: 2px solid var(--glass-border);
+            box-shadow: var(--shadow-lg);
             transition: all 0.4s ease;
+            display: block;
         }
 
-        .qris-img:hover {
-            transform: translateY(-6px) scale(1.02);
-            box-shadow: 
-                0 20px 60px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(255, 255, 255, 0.1);
+        .donation-image:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 24px 72px rgba(0, 0, 0, 0.4);
+            border-color: var(--primary);
         }
 
+        .donation-note {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Developer Section */
         .code-block {
             background: var(--code-bg);
             color: var(--text-secondary);
             padding: 1.5rem;
-            border-radius: 14px;
+            border-radius: 12px;
             border: 1px solid var(--glass-border);
             font-family: 'Monaco', 'Consolas', 'Courier New', monospace;
             font-size: 0.9rem;
-            line-height: 1.8;
+            line-height: 1.6;
             overflow-x: auto;
-            margin-top: 1rem;
+            margin: 1rem 0;
             position: relative;
-            backdrop-filter: blur(10px);
         }
 
         .code-block::before {
             content: 'API Request';
             position: absolute;
             top: -10px;
-            left: 20px;
+            left: 1rem;
             background: var(--code-bg);
-            padding: 4px 12px;
-            font-size: 0.8rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
             color: var(--text-secondary);
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.8px;
-            border-radius: 8px;
+            letter-spacing: 1px;
+            border-radius: 6px;
             font-family: 'Space Grotesk', sans-serif;
             border: 1px solid var(--glass-border);
         }
 
+        /* Footer */
         .footer {
             text-align: center;
             font-family: 'Space Grotesk', sans-serif;
             font-weight: 700;
             font-size: 0.9rem;
             color: var(--text-secondary);
-            padding: 32px 24px;
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            padding: 2rem;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-top: 1px solid var(--glass-border);
-            margin-top: auto;
+            margin-top: 4rem;
             letter-spacing: 0.5px;
         }
 
@@ -657,256 +922,191 @@
             margin: 0 auto;
         }
 
-        .spin { 
-            animation: spin 1s linear infinite; 
-        }
-
-        @keyframes spin { 
-            100% { 
-                transform: rotate(360deg); 
-            } 
-        }
-
-        .ig-btn {
-            width: 100%;
-            padding: 18px;
-            background: var(--instagram-gradient);
-            color: white;
-            border-radius: 14px;
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 1.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(225, 48, 108, 0.2);
-            position: relative;
-            overflow: hidden;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .ig-btn::before {
-            content: '';
-            position: absolute;
+        /* Loader */
+        .loader-overlay {
+            position: fixed;
             top: 0;
-            left: -100%;
+            left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .ig-btn:hover::before {
-            left: 100%;
-        }
-
-        .ig-btn:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 16px 48px rgba(225, 48, 108, 0.3);
-            letter-spacing: 1.2px;
-        }
-
-        .ig-btn:active {
-            transform: translateY(-1px);
-        }
-
-        .verified-badge {
-            display: flex;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(10px);
+            display: none;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.05));
-            color: var(--success);
-            padding: 16px;
-            border-radius: 14px;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            font-family: 'Space Grotesk', sans-serif;
-            letter-spacing: 0.5px;
-            backdrop-filter: blur(10px);
-            text-transform: uppercase;
+            z-index: 2000;
         }
 
-        .api-status {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 0.9rem;
-            margin: 12px 0;
-            padding: 12px 16px;
-            background: var(--input-bg);
-            border-radius: 12px;
-            border-left: 4px solid var(--success);
-            font-family: 'Space Grotesk', sans-serif;
-            letter-spacing: 0.5px;
-            backdrop-filter: blur(10px);
-        }
-
-        .api-status.error {
-            border-left-color: var(--error);
-            color: var(--error);
-            background: rgba(239, 68, 68, 0.1);
-        }
-
-        .api-status.warning {
-            border-left-color: var(--accent);
-            color: var(--accent);
-            background: rgba(245, 158, 11, 0.1);
-        }
-
-        .status-dot {
-            width: 12px;
-            height: 12px;
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(99, 102, 241, 0.3);
             border-radius: 50%;
-            background: var(--success);
-            box-shadow: 0 0 10px var(--success);
-            animation: pulse 2s infinite ease-in-out;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
         }
 
-        .status-dot.error {
-            background: var(--error);
-            box-shadow: 0 0 10px var(--error);
-            animation: none;
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
         }
 
-        .status-dot.warning {
-            background: var(--accent);
-            box-shadow: 0 0 10px var(--accent);
-            animation: pulse 2s infinite ease-in-out;
-        }
-
-        @keyframes pulse {
-            0%, 100% { 
-                opacity: 1; 
-                transform: scale(1);
-            }
-            50% { 
-                opacity: 0.7; 
-                transform: scale(1.1);
-            }
-        }
-
-        .verification-info {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), transparent);
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            border-radius: 14px;
-            padding: 1.2rem;
-            margin-bottom: 1.5rem;
-            text-align: center;
-            backdrop-filter: blur(10px);
-        }
-
-        .verification-info p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            margin: 0;
-            font-weight: 500;
-        }
-
-        .api-rotation-info {
-            margin-top: 1rem;
-            padding: 1rem;
-            background: rgba(139, 92, 246, 0.1);
-            border-radius: 12px;
-            border: 1px solid rgba(139, 92, 246, 0.2);
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-
-        .api-rotation-info strong {
-            color: var(--primary);
-        }
-
-        /* Custom Icons (SVG Embedded) */
-        .icon-zap {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%238b5cf6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='13 2 3 14 12 14 11 22 21 10 12 10 13 2'%3E%3C/polygon%3E%3C/svg%3E");
-        }
-
-        .icon-instagram {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23E1306C'%3E%3Cpath d='M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z'/%3E%3C/svg%3E");
-        }
-
-        .icon-heart {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ef4444' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z'%3E%3C/path%3E%3C/svg%3E");
-        }
-
-        .icon-code {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2310b981' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='16 18 22 12 16 6'%3E%3C/polyline%3E%3Cpolyline points='8 6 2 12 8 18'%3E%3C/polyline%3E%3C/svg%3E");
-        }
-
-        .icon-send {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='22' y1='2' x2='11' y2='13'%3E%3C/line%3E%3Cpolygon points='22 2 15 22 11 13 2 9 22 2'%3E%3C/polygon%3E%3C/svg%3E");
-        }
-
-        .icon-check {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2310b981' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
-        }
-
-        .icon-loader {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='12' y1='2' x2='12' y2='6'%3E%3C/line%3E%3Cline x1='12' y1='18' x2='12' y2='22'%3E%3C/line%3E%3Cline x1='4.93' y1='4.93' x2='7.76' y2='7.76'%3E%3C/line%3E%3Cline x1='16.24' y1='16.24' x2='19.07' y2='19.07'%3E%3C/line%3E%3Cline x1='2' y1='12' x2='6' y2='12'%3E%3C/line%3E%3Cline x1='18' y1='12' x2='22' y2='12'%3E%3C/line%3E%3Cline x1='4.93' y1='19.07' x2='7.76' y2='16.24'%3E%3C/line%3E%3Cline x1='16.24' y1='7.76' x2='19.07' y2='4.93'%3E%3C/line%3E%3C/svg%3E");
-        }
-
-        .icon-menu {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23cbd5e1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='3' y1='12' x2='21' y2='12'%3E%3C/line%3E%3Cline x1='3' y1='6' x2='21' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='18' x2='21' y2='18'%3E%3C/line%3E%3C/svg%3E");
-        }
-
-        .icon-x {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23cbd5e1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E");
-        }
-
-        .icon-api {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%238b5cf6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cline x1='2' y1='12' x2='22' y2='12'%3E%3C/line%3E%3Cpath d='M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z'%3E%3C/path%3E%3C/svg%3E");
-        }
-
+        /* Responsive */
         @media(min-width: 768px) {
             .mobile-toggle { display: none; }
             .desktop-nav { display: flex; }
             .main-content { max-width: 800px; }
+            
+            .captcha-challenge {
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            .captcha-label {
+                font-size: 1rem;
+            }
         }
 
         @media(max-width: 768px) {
             .card { padding: 2rem; }
             .card-title { font-size: 1.5rem; }
-            .mobile-link { font-size: 1.5rem; min-width: 240px; padding: 14px 24px; }
-            .nav-container { padding: 0 20px; }
-            .main-content { margin: 100px auto 40px; padding: 0 20px; }
-            .badge { right: 16px; padding: 6px 16px; font-size: 0.8rem; }
+            .nav-container { padding: 0 1.5rem; }
+            .main-content { margin: 90px auto 40px; padding: 0 1.5rem; }
+            .badge { right: 1.5rem; }
+            .captcha-text {
+                font-size: 2rem;
+                letter-spacing: 6px;
+                min-width: 240px;
+                padding: 0.75rem 1.5rem;
+            }
+            .toast-container {
+                left: 1.5rem;
+                right: 1.5rem;
+                max-width: none;
+            }
+            .donation-image {
+                max-width: 280px;
+            }
         }
 
         @media(max-width: 480px) {
             .card { padding: 1.5rem; }
-            .card-title { font-size: 1.3rem; gap: 12px; }
-            .logo { font-size: 1.3rem; }
-            .logo-icon { width: 28px; height: 28px; }
+            .card-title { font-size: 1.3rem; gap: 0.75rem; }
+            .logo { font-size: 1.2rem; }
+            .logo-icon { width: 36px; height: 36px; }
+            .captcha-text {
+                font-size: 1.75rem;
+                letter-spacing: 4px;
+                min-width: 200px;
+                padding: 0.5rem 1rem;
+            }
+            .captcha-buttons {
+                flex-direction: column;
+            }
+            .mobile-link {
+                width: 240px;
+                font-size: 1.5rem;
+                padding: 0.875rem 1.5rem;
+            }
+        }
+
+        /* Icons */
+        .icon {
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+            vertical-align: middle;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .icon-lg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .icon-zap {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='13 2 3 14 12 14 11 22 21 10 12 10 13 2'%3E%3C/polygon%3E%3C/svg%3E");
+        }
+
+        .icon-instagram {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23E1306C'%3E%3Cpath d='M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z'/%3E%3C/svg%3E");
+        }
+
+        .icon-check {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2310b981' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+        }
+
+        .icon-error {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ef4444' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cline x1='15' y1='9' x2='9' y2='15'%3E%3C/line%3E%3Cline x1='9' y1='9' x2='15' y2='15'%3E%3C/line%3E%3C/svg%3E");
+        }
+
+        .icon-shield {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'%3E%3C/path%3E%3C/svg%3E");
+        }
+
+        .icon-refresh {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M23 4v6h-6'%3E%3C/path%3E%3Cpath d='M1 20v-6h6'%3E%3C/path%3E%3Cpath d='M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15'%3E%3C/path%3E%3C/svg%3E");
+        }
+
+        .icon-heart {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ef4444' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z'%3E%3C/path%3E%3C/svg%3E");
+        }
+
+        .icon-code {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2310b981' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='16 18 22 12 16 6'%3E%3C/polyline%3E%3Cpolyline points='8 6 2 12 8 18'%3E%3C/polyline%3E%3C/svg%3E");
+        }
+
+        .icon-send {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='22' y1='2' x2='11' y2='13'%3E%3C/line%3E%3Cpolygon points='22 2 15 22 11 13 2 9 22 2'%3E%3C/polygon%3E%3C/svg%3E");
+        }
+
+        .icon-loader {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='12' y1='2' x2='12' y2='6'%3E%3C/line%3E%3Cline x1='12' y1='18' x2='12' y2='22'%3E%3C/line%3E%3Cline x1='4.93' y1='4.93' x2='7.76' y2='7.76'%3E%3C/line%3E%3Cline x1='16.24' y1='16.24' x2='19.07' y2='19.07'%3E%3C/line%3E%3Cline x1='2' y1='12' x2='6' y2='12'%3E%3C/line%3E%3Cline x1='18' y1='12' x2='22' y2='12'%3E%3C/line%3E%3Cline x1='4.93' y1='19.07' x2='7.76' y2='16.24'%3E%3C/line%3E%3Cline x1='16.24' y1='7.76' x2='19.07' y2='4.93'%3E%3C/line%3E%3C/svg%3E");
+        }
+
+        .icon-menu {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='3' y1='12' x2='21' y2='12'%3E%3C/line%3E%3Cline x1='3' y1='6' x2='21' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='18' x2='21' y2='18'%3E%3C/line%3E%3C/svg%3E");
+        }
+
+        .icon-x {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E");
         }
     </style>
 </head>
 <body>
-    <!-- Floating Background Animation -->
-    <div class="floating-bg">
-        <div></div>
-        <div></div>
-        <div></div>
+    <!-- Background Elements -->
+    <div class="bg-noise"></div>
+    <div class="floating-elements">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
     </div>
 
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Loader -->
+    <div class="loader-overlay" id="loaderOverlay">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Mobile Menu -->
     <nav id="mobileNav" class="mobile-menu">
         <a href="#reactor" class="mobile-link js-nav">Reactor</a>
         <a href="#donation" class="mobile-link js-nav">Donasi</a>
         <a href="#developer" class="mobile-link js-nav">Developer</a>
     </nav>
 
+    <!-- Header -->
     <header class="header" id="header">
         <div class="nav-container">
             <div class="logo">
                 <div class="logo-icon">
-                    <div class="icon icon-zap"></div>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
                 </div>
                 <span>WA Reactor Pro</span>
             </div>
@@ -923,101 +1123,157 @@
         </div>
     </header>
 
+    <!-- Main Content -->
     <main class="main-content">
         
+        <!-- Reactor Section -->
         <section id="reactor" class="card">
-            <div class="badge">V2.2.0</div>
+            <div class="badge">V3.0</div>
             <h1 class="card-title">
                 <div class="icon icon-zap icon-lg"></div>
-                Reactor Tool
+                WhatsApp Channel Reactor
             </h1>
 
-            <!-- Verifikasi Section -->
+            <!-- Verification Section -->
             <div id="verificationSection">
-                <button id="verifyBtn" class="ig-btn">
+                <button id="verifyBtn" class="btn btn-instagram">
                     <div class="icon icon-instagram icon-lg"></div>
                     <span id="verifyText">Verifikasi Instagram untuk React</span>
                 </button>
                 
                 <div id="verifiedBadge" class="verified-badge" style="display: none;">
                     <div class="icon icon-check icon-lg"></div>
-                    <span>Akun Terverifikasi - Reactor Siap Digunakan!</span>
+                    <span>✅ Akun Terverifikasi - Reactor Siap Digunakan!</span>
                 </div>
                 
-                <div class="verification-info">
-                    <p>Ikuti Instagram admin kami untuk mengaktifkan Reactor</p>
-                </div>
-                
-                <div class="api-rotation-info">
-                    <strong>Sistem Rotasi API:</strong> Setiap pengguna mendapatkan API yang berbeda secara acak. Sistem otomatis beralih jika API habis.
+                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 12px; border: 1px solid rgba(99, 102, 241, 0.2);">
+                    <p style="text-align: center; color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
+                        <strong>⚠️ Penting:</strong> Verifikasi Instagram diperlukan untuk menggunakan fitur Reactor. 
+                        Follow Instagram admin kami untuk mengaktifkan tool ini.
+                    </p>
                 </div>
             </div>
 
             <form id="reactorForm">
-                <div class="input-group">
-                    <label for="link">Channel Link</label>
-                    <input type="url" id="link" placeholder="https://whatsapp.com/channel/..." required autocomplete="off">
-                </div>
-                <div class="input-group">
-                    <label for="emoji">Emoji</label>
-                    <input type="text" id="emoji" placeholder="Type emoji here..." required autocomplete="off">
+                <div class="form-group">
+                    <label class="form-label" for="link">🔗 Link Channel WhatsApp</label>
+                    <input type="url" id="link" class="form-input" placeholder="https://whatsapp.com/channel/..." required autocomplete="off">
                 </div>
                 
-                <!-- API Status Indicator -->
-                <div id="apiStatus" class="api-status">
-                    <div class="status-dot"></div>
-                    <span id="apiStatusText">Menggunakan API 1 (Active)</span>
+                <div class="form-group">
+                    <label class="form-label" for="emoji">😊 Emoji Reaction (pisahkan dengan koma)</label>
+                    <input type="text" id="emoji" class="form-input" placeholder="🔥,❤️,💸,👍,😍" required autocomplete="off">
+                    <small style="display: block; margin-top: 0.5rem; color: var(--text-muted); font-size: 0.85rem;">
+                        Contoh: 🔥,❤️,💸 (bisa menggunakan 1-5 emoji, pisahkan dengan koma)
+                    </small>
+                </div>
+                
+                <!-- CAPTCHA Section - DIPERBAIKI -->
+                <div class="captcha-container">
+                    <div class="captcha-header">
+                        <div class="icon icon-shield"></div>
+                        <span>Verifikasi Keamanan</span>
+                    </div>
+                    
+                    <div class="captcha-challenge">
+                        <div class="captcha-label">Masukkan kode di bawah:</div>
+                        <div class="captcha-text" id="captchaText">ABC12</div>
+                    </div>
+                    
+                    <div class="captcha-input-wrapper">
+                        <input type="text" 
+                               id="captchaInput" 
+                               class="captcha-input" 
+                               placeholder="Ketik kode keamanan di atas" 
+                               maxlength="6"
+                               autocomplete="off">
+                    </div>
+                    
+                    <div class="captcha-error" id="captchaError">
+                        Kode verifikasi salah! Silakan coba lagi.
+                    </div>
+                    
+                    <div class="captcha-buttons">
+                        <button type="button" class="captcha-btn captcha-refresh" id="refreshCaptcha">
+                            <div class="icon icon-refresh"></div>
+                            Refresh Kode
+                        </button>
+                        <button type="button" class="captcha-btn captcha-verify" id="verifyCaptcha" disabled>
+                            Verifikasi CAPTCHA
+                        </button>
+                    </div>
                 </div>
 
-                <button type="submit" id="submitBtn" class="btn-primary" disabled>
+                <button type="submit" id="submitBtn" class="btn btn-primary" disabled>
                     <div class="icon icon-send" id="btnIcon"></div>
-                    <span id="btnText">Verifikasi Follow Ig dulu</span>
+                    <span id="btnText">Kirim Reaction</span>
                 </button>
             </form>
-            <div id="statusArea" class="status-area"></div>
         </section>
 
+        <!-- Donation Section - DIPERBAIKI -->
         <section id="donation" class="card">
             <h2 class="card-title">
                 <div class="icon icon-heart icon-lg"></div>
-                Dukungan
+                Dukungan & Donasi
             </h2>
-            <p style="margin-bottom: 1.5rem; font-weight: 500; color: var(--text-secondary); line-height: 1.6;">
-                Bantu kami terus mengembangkan alat ini dengan donasi. Setiap kontribusi sangat berarti untuk menjaga server tetap aktif dan fitur terbaru.
-            </p>
-            <img src="assets/images/qris.webp" alt="QRIS Donation" class="qris-img" onerror="this.onerror=null; this.src='https://files.catbox.moe/ee75hf.jpeg'">
-            <p style="margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-secondary); text-align: center;">
-                Scan QRIS untuk donasi via e-wallet atau mobile banking
-            </p>
+            <div class="donation-content">
+                <p style="margin-bottom: 1.5rem; font-weight: 500; color: var(--text-secondary); line-height: 1.6;">
+                    Bantu kami terus mengembangkan alat ini dengan donasi. Setiap kontribusi sangat berarti untuk menjaga server tetap aktif dan mengembangkan fitur terbaru.
+                </p>
+                
+                <div style="margin: 2rem 0;">
+                    <img src="https://files.catbox.moe/ee75hf.jpeg" 
+                         alt="QRIS Donation" 
+                         class="donation-image"
+                         onerror="this.onerror=null; this.src='https://via.placeholder.com/320x320/6366f1/ffffff?text=QRIS+Donation'">
+                </div>
+                
+                <p class="donation-note">
+                    Scan QRIS di atas untuk donasi via e-wallet, mobile banking, atau aplikasi pembayaran digital lainnya.<br>
+                    Terima kasih atas dukungan Anda! 🙏
+                </p>
+            </div>
         </section>
 
+        <!-- Developer Section -->
         <section id="developer" class="card">
             <h2 class="card-title">
                 <div class="icon icon-code icon-lg"></div>
                 Untuk Developer
             </h2>
             <p style="margin-bottom: 1.5rem; font-weight: 500; color: var(--text-secondary); line-height: 1.6;">
-                Dapatkan API key untuk integrasi dengan aplikasi Anda. Sistem akan otomatis menggunakan API cadangan jika API utama habis.
+                API endpoint baru untuk integrasi dengan aplikasi Anda.
             </p>
-            <div class="input-group">
-                <label>Endpoint</label>
-                <input type="text" value="https://react.whyux-xec.my.id/api/rch" readonly>
+            
+            <div class="form-group">
+                <label class="form-label">🌐 Endpoint API</label>
+                <input type="text" class="form-input" value="Haduhhh" readonly>
             </div>
-            <label>Contoh Request (cURL)</label>
+            
+            <label class="form-label">📝 Contoh Request (cURL)</label>
             <div class="code-block">
-curl -X GET \<br>
-"https://react.whyux-xec.my.id/api/rch?link={LINK}&emoji={EMOJI}" \<br>
--H "x-api-key: {YOUR_API_KEY}"
+                Waduhh 
             </div>
-            <div style="margin-top: 1.5rem; padding: 1.2rem; background: var(--input-bg); border-radius: 12px; border: 1px solid var(--glass-border); backdrop-filter: blur(10px);">
-                <h4 style="margin-bottom: 12px; color: var(--text-main); font-family: 'Space Grotesk', sans-serif;">
-                    <div class="icon icon-api" style="vertical-align: middle; margin-right: 8px;"></div>
-                    API Rotation System
+            
+            <div style="margin-top: 1.5rem; padding: 1.5rem; background: rgba(15, 23, 42, 0.5); border-radius: 12px; border: 1px solid var(--glass-border);">
+                <h4 style="margin-bottom: 12px; color: var(--text-main); font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem;">
+                    📋 Contoh Lengkap
                 </h4>
-                <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5;">
-                    <strong>3 API Keys:</strong><br>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">
+                    <strong>URL:</strong><br>
+                    <code style="background: rgba(0,0,0,0.3); padding: 0.5rem; border-radius: 6px; display: block; margin: 0.5rem 0; word-break: break-all; font-size: 0.85rem;">
+                        
+                    </code>
                     
-                    Sistem otomatis memilih API secara acak untuk setiap sesi pengguna. Jika satu API habis/error, sistem beralih ke API berikutnya.
+                    <strong>Response Format:</strong><br>
+                    <code style="background: rgba(0,0,0,0.3); padding: 0.5rem; border-radius: 6px; display: block; margin: 0.5rem 0; font-size: 0.85rem;">
+                        {<br>
+                        &nbsp;&nbsp;"status": "success",<br>
+                        &nbsp;&nbsp;"message": "Reaction sent successfully",<br>
+                        &nbsp;&nbsp;"timestamp": "2024-01-15T10:30:00Z"<br>
+                        }
+                    </code>
                 </p>
             </div>
         </section>
@@ -1026,130 +1282,205 @@ curl -X GET \<br>
 
     <footer class="footer">
         <div class="footer-content">
-            &copy; 2025 Harits Strom. All rights reserved.
+            &copy; 2025 WA Channel Reactor Pro. All rights reserved.
             <div style="margin-top: 10px; font-size: 0.8rem; opacity: 0.7; letter-spacing: 0.3px;">
-                WA Channel Reactor Pro - Automated Reaction Tool v2.2.0
+                Automated WhatsApp Channel Reaction Tool v3.0
             </div>
         </div>
     </footer>
 
     <script>
         // Elements
-        const els = {
+        const elements = {
+            // Navigation
             nav: document.getElementById('mobileNav'),
             menuBtn: document.getElementById('menuBtn'),
             menuIcon: document.getElementById('menuIcon'),
+            
+            // Form
             form: document.getElementById('reactorForm'),
             submitBtn: document.getElementById('submitBtn'),
             btnIcon: document.getElementById('btnIcon'),
             btnText: document.getElementById('btnText'),
-            statusArea: document.getElementById('statusArea'),
             linkInput: document.getElementById('link'),
             emojiInput: document.getElementById('emoji'),
+            
+            // Verification
             verifyBtn: document.getElementById('verifyBtn'),
             verifyText: document.getElementById('verifyText'),
             verifiedBadge: document.getElementById('verifiedBadge'),
-            apiStatus: document.getElementById('apiStatus'),
-            apiStatusText: document.getElementById('apiStatusText'),
-            header: document.getElementById('header')
+            
+            // CAPTCHA
+            captchaText: document.getElementById('captchaText'),
+            captchaInput: document.getElementById('captchaInput'),
+            captchaError: document.getElementById('captchaError'),
+            refreshCaptcha: document.getElementById('refreshCaptcha'),
+            verifyCaptcha: document.getElementById('verifyCaptcha'),
+            
+            // UI
+            header: document.getElementById('header'),
+            toastContainer: document.getElementById('toastContainer'),
+            loaderOverlay: document.getElementById('loaderOverlay')
         };
 
-        // Configuration - Updated API Keys
+        // Configuration
         const config = {
-            API_KEYS: [
-                "f2b6e44afe54428b29f3b231fec7d0eaf403a713ef7a0ebb7cd5df00e4980e64",
-                "de41e346fb490e7da55589cf9b44d526dfd9d957c0178ea6a83fa711af109411",
-                "4a84cb8538c876d41eb0e4c8126a1aafb1ba787c1eaa8612662f616515514be3"
-            ],
+            API_ENDPOINT: "https://api-faa.my.id/faa/react-channel",
             INSTAGRAM_URL: "https://www.instagram.com/ritzxza?igsh=d21maDEwYmZsZXlq",
             INSTAGRAM_ACCOUNT: "@ritzxza"
         };
 
-        // State variables
+        // State
         let isMenuOpen = false;
         let isVerified = localStorage.getItem('igVerified') === 'true';
-        let currentApiIndex = 0;
+        let captchaVerified = false;
+        let currentCaptcha = "";
         let isProcessing = false;
-        let sessionApiIndex = null; // API index khusus untuk sesi ini
 
         // Initialize
-        init();
+        document.addEventListener('DOMContentLoaded', () => {
+            init();
+        });
 
         function init() {
-            // Generate random API index for this session
-            sessionApiIndex = Math.floor(Math.random() * config.API_KEYS.length);
-            currentApiIndex = sessionApiIndex;
-            
             // Check verification status
             if (isVerified) {
                 enableReactor();
-                els.verifiedBadge.style.display = 'flex';
-                els.verifyBtn.style.display = 'none';
+                elements.verifiedBadge.style.display = 'flex';
+                elements.verifyBtn.style.display = 'none';
+                showToast('success', '✅ Verifikasi Berhasil', 'Akun Anda sudah terverifikasi. Reactor siap digunakan!');
             }
+
+            // Generate initial CAPTCHA
+            generateCaptcha();
 
             // Setup event listeners
             setupEventListeners();
 
             // Setup scroll effect
             window.addEventListener('scroll', handleScroll);
-
-            // Update API status
-            updateApiStatus('active', `Menggunakan API ${currentApiIndex + 1} (Sesi ${getSessionId()})`);
-        }
-
-        function getSessionId() {
-            // Generate a simple session ID based on random number
-            let sessionId = localStorage.getItem('reactorSessionId');
-            if (!sessionId) {
-                sessionId = Math.random().toString(36).substr(2, 9);
-                localStorage.setItem('reactorSessionId', sessionId);
-            }
-            return sessionId;
         }
 
         function setupEventListeners() {
             // Mobile menu
-            els.menuBtn.addEventListener('click', toggleMenu);
+            elements.menuBtn.addEventListener('click', toggleMenu);
             document.querySelectorAll('.js-nav').forEach(l => l.addEventListener('click', toggleMenu));
 
             // Instagram verification
-            els.verifyBtn.addEventListener('click', handleVerification);
+            elements.verifyBtn.addEventListener('click', handleVerification);
 
             // Form submission
-            els.form.addEventListener('submit', handleFormSubmit);
+            elements.form.addEventListener('submit', handleFormSubmit);
 
             // Input validation
-            els.linkInput.addEventListener('input', validateForm);
-            els.emojiInput.addEventListener('input', validateForm);
+            elements.linkInput.addEventListener('input', validateForm);
+            elements.emojiInput.addEventListener('input', validateForm);
+
+            // CAPTCHA events
+            elements.captchaInput.addEventListener('input', handleCaptchaInput);
+            elements.refreshCaptcha.addEventListener('click', generateCaptcha);
+            elements.verifyCaptcha.addEventListener('click', verifyCaptcha);
+            
+            // Allow Enter key for CAPTCHA
+            elements.captchaInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' && !elements.verifyCaptcha.disabled) {
+                    verifyCaptcha();
+                }
+            });
         }
 
         function handleScroll() {
             if (window.scrollY > 50) {
-                els.header.classList.add('scrolled');
+                elements.header.classList.add('scrolled');
             } else {
-                els.header.classList.remove('scrolled');
+                elements.header.classList.remove('scrolled');
             }
         }
 
         function toggleMenu() {
             isMenuOpen = !isMenuOpen;
-            els.nav.classList.toggle('open', isMenuOpen);
-            els.menuIcon.className = isMenuOpen ? 'icon icon-x' : 'icon icon-menu';
+            elements.nav.classList.toggle('open', isMenuOpen);
+            elements.menuIcon.className = isMenuOpen ? 'icon icon-x' : 'icon icon-menu';
         }
 
+        // ==================== CAPTCHA FUNCTIONS ====================
+        function generateCaptcha() {
+            // Generate 5-character alphanumeric CAPTCHA
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+            currentCaptcha = '';
+            for (let i = 0; i < 5; i++) {
+                currentCaptcha += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            
+            elements.captchaText.textContent = currentCaptcha;
+            elements.captchaInput.value = "";
+            elements.captchaInput.className = "captcha-input";
+            elements.captchaError.style.display = "none";
+            elements.verifyCaptcha.disabled = true;
+            elements.verifyCaptcha.textContent = "Verifikasi CAPTCHA";
+            elements.verifyCaptcha.className = "captcha-btn captcha-verify";
+            captchaVerified = false;
+            validateForm();
+        }
+
+        function handleCaptchaInput() {
+            const input = elements.captchaInput.value.trim().toUpperCase();
+            elements.captchaInput.value = input;
+            
+            // Reset error state
+            elements.captchaInput.className = "captcha-input";
+            elements.captchaError.style.display = "none";
+            
+            // Enable/disable verify button
+            elements.verifyCaptcha.disabled = input.length !== 5;
+        }
+
+        function verifyCaptcha() {
+            const input = elements.captchaInput.value.trim().toUpperCase();
+            
+            if (input === currentCaptcha) {
+                // Success
+                captchaVerified = true;
+                elements.captchaInput.className = "captcha-input correct";
+                elements.captchaError.style.display = "none";
+                elements.verifyCaptcha.textContent = "✅ CAPTCHA Terverifikasi";
+                elements.verifyCaptcha.className = "captcha-btn captcha-verified";
+                elements.verifyCaptcha.disabled = true;
+                showToast('success', '✅ CAPTCHA Berhasil', 'Verifikasi keamanan berhasil!');
+                validateForm();
+                
+                // Auto reset after 5 minutes
+                setTimeout(() => {
+                    if (captchaVerified) {
+                        showToast('info', '⏰ CAPTCHA Expired', 'Verifikasi CAPTCHA telah kadaluarsa. Silakan refresh kode baru.');
+                        generateCaptcha();
+                    }
+                }, 300000);
+            } else {
+                // Error
+                captchaVerified = false;
+                elements.captchaInput.className = "captcha-input error";
+                elements.captchaError.style.display = "block";
+                elements.captchaInput.focus();
+                showToast('error', '❌ CAPTCHA Salah', 'Kode verifikasi tidak sesuai. Silakan coba lagi.');
+                validateForm();
+            }
+        }
+
+        // ==================== VERIFICATION FUNCTIONS ====================
         function handleVerification() {
             // Open Instagram in new tab
             window.open(config.INSTAGRAM_URL, '_blank');
             
             // Show loading state
-            els.verifyText.textContent = "Memverifikasi...";
-            els.verifyBtn.disabled = true;
-            els.verifyBtn.innerHTML = '<div class="icon icon-loader spin"></div> Memverifikasi...';
+            elements.verifyText.textContent = "Memverifikasi...";
+            elements.verifyBtn.disabled = true;
+            elements.verifyBtn.innerHTML = '<div class="icon icon-loader spin"></div> Memverifikasi...';
             
             // Simulate verification process
             setTimeout(() => {
                 showVerificationPopup();
-            }, 2000);
+            }, 1500);
         }
 
         function showVerificationPopup() {
@@ -1170,8 +1501,8 @@ curl -X GET \<br>
             
             modal.innerHTML = `
                 <div style="
-                    background: rgba(15, 23, 42, 0.95);
-                    border: 1px solid rgba(225, 48, 108, 0.3);
+                    background: rgba(25, 25, 40, 0.95);
+                    border: 1px solid rgba(99, 102, 241, 0.3);
                     border-radius: 20px;
                     padding: 2rem;
                     max-width: 400px;
@@ -1179,26 +1510,30 @@ curl -X GET \<br>
                     text-align: center;
                     backdrop-filter: blur(20px);
                     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+                    animation: modalSlideIn 0.3s ease;
                 ">
                     <div style="margin-bottom: 1rem;">
-                        <div class="icon icon-instagram icon-lg" style="margin: 0 auto;"></div>
+                        <div class="icon icon-instagram" style="margin: 0 auto; width: 48px; height: 48px;"></div>
                     </div>
                     <h3 style="
                         color: var(--text-main);
                         margin-bottom: 1rem;
                         font-family: 'Space Grotesk', sans-serif;
+                        font-size: 1.2rem;
                     ">Verifikasi Instagram</h3>
                     <p style="
                         color: var(--text-secondary);
                         margin-bottom: 1.5rem;
                         line-height: 1.5;
+                        font-size: 0.95rem;
                     ">
-                        Apakah Anda sudah Follow Instagram admin kami? <strong>${config.INSTAGRAM_ACCOUNT}</strong>?
+                        Apakah Anda sudah Follow Instagram admin kami?<br>
+                        <strong style="color: #E1306C;">${config.INSTAGRAM_ACCOUNT}</strong>
                     </p>
                     <div style="display: flex; gap: 1rem; justify-content: center;">
                         <button id="confirmYes" style="
                             padding: 12px 24px;
-                            background: var(--instagram-gradient);
+                            background: var(--purple-gradient);
                             color: white;
                             border: none;
                             border-radius: 10px;
@@ -1206,17 +1541,23 @@ curl -X GET \<br>
                             cursor: pointer;
                             transition: all 0.3s ease;
                             flex: 1;
-                        ">Ya, Sudah</button>
+                            font-family: 'Space Grotesk', sans-serif;
+                            text-transform: uppercase;
+                            letter-spacing: 0.5px;
+                        ">Ya, Sudah Follow</button>
                         <button id="confirmNo" style="
                             padding: 12px 24px;
-                            background: rgba(239, 68, 68, 0.2);
-                            color: var(--error);
-                            border: 1px solid var(--error);
+                            background: rgba(30, 41, 59, 0.8);
+                            color: var(--text-secondary);
+                            border: 1px solid var(--glass-border);
                             border-radius: 10px;
                             font-weight: 600;
                             cursor: pointer;
                             transition: all 0.3s ease;
                             flex: 1;
+                            font-family: 'Space Grotesk', sans-serif;
+                            text-transform: uppercase;
+                            letter-spacing: 0.5px;
                         ">Belum</button>
                     </div>
                 </div>
@@ -1250,171 +1591,202 @@ curl -X GET \<br>
             enableReactor();
             
             // Update UI
-            els.verifiedBadge.style.display = 'flex';
-            els.verifyBtn.style.display = 'none';
+            elements.verifiedBadge.style.display = 'flex';
+            elements.verifyBtn.style.display = 'none';
             
-            showStatus('success', '🎉 Verifikasi berhasil! Reactor sekarang aktif.');
+            showToast('success', '🎉 Verifikasi Berhasil!', 'Selamat! Reactor sekarang aktif dan siap digunakan.');
         }
 
         function verifyFailed() {
             // Reset button state
-            els.verifyText.textContent = "Verifikasi Instagram untuk React";
-            els.verifyBtn.disabled = false;
-            els.verifyBtn.innerHTML = '<div class="icon icon-instagram icon-lg"></div><span>Verifikasi Instagram untuk React</span>';
+            elements.verifyText.textContent = "Verifikasi Instagram untuk React";
+            elements.verifyBtn.disabled = false;
+            elements.verifyBtn.innerHTML = '<div class="icon icon-instagram icon-lg"></div><span>Verifikasi Instagram untuk React</span>';
             
-            showStatus('error', 'Silakan follow Instagram admin kami terlebih dahulu.');
+            showToast('error', '❌ Verifikasi Gagal', 'Silakan follow Instagram admin kami terlebih dahulu.');
         }
 
         function enableReactor() {
-            els.submitBtn.disabled = false;
-            els.btnText.textContent = "React Now";
+            elements.submitBtn.disabled = false;
+            elements.btnText.textContent = "Kirim Reaction";
+            showToast('success', '✅ Reactor Aktif', 'Reactor telah diaktifkan. Isi form dan kirim reaction!');
         }
 
+        // ==================== FORM FUNCTIONS ====================
         function validateForm() {
-            const link = els.linkInput.value.trim();
-            const emoji = els.emojiInput.value.trim();
+            const link = elements.linkInput.value.trim();
+            const emoji = elements.emojiInput.value.trim();
             
             if (!isVerified) {
-                els.submitBtn.disabled = true;
+                elements.submitBtn.disabled = true;
+                elements.btnText.textContent = "Verifikasi Ig Dulu";
+                return;
+            }
+            
+            if (!captchaVerified) {
+                elements.submitBtn.disabled = true;
+                elements.btnText.textContent = "Verifikasi CAPTCHA";
                 return;
             }
             
             if (link && emoji && !isProcessing) {
-                els.submitBtn.disabled = false;
+                elements.submitBtn.disabled = false;
+                elements.btnText.textContent = "Kirim Reaction";
             } else {
-                els.submitBtn.disabled = true;
+                elements.submitBtn.disabled = true;
+                elements.btnText.textContent = "Isi Form Lengkap";
             }
         }
 
-        function updateApiStatus(status, message) {
-            const statusDot = els.apiStatus.querySelector('.status-dot');
-            els.apiStatus.className = `api-status ${status}`;
-            statusDot.className = `status-dot ${status}`;
-            els.apiStatusText.textContent = message;
-        }
-
-        function rotateApiKey() {
-            // Try next API key
-            currentApiIndex = (currentApiIndex + 1) % config.API_KEYS.length;
-            const apiNumber = currentApiIndex + 1;
+        // ==================== TOAST NOTIFICATION ====================
+        function showToast(type, title, message) {
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `
+                <div class="toast-icon icon icon-${type === 'success' ? 'check' : type === 'error' ? 'error' : 'info'}"></div>
+                <div class="toast-content">
+                    <div class="toast-title">${title}</div>
+                    <div class="toast-message">${message}</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                </div>
+            `;
             
-            if (currentApiIndex === config.API_KEYS.length - 1) {
-                updateApiStatus('warning', `Menggunakan API ${apiNumber} (Terakhir)`);
-            } else {
-                updateApiStatus('active', `Menggunakan API ${apiNumber} (Active)`);
-            }
+            elements.toastContainer.appendChild(toast);
             
-            return config.API_KEYS[currentApiIndex];
-        }
-
-        function showStatus(type, message) {
-            els.statusArea.style.display = 'block';
-            els.statusArea.className = `status-area ${type === 'success' ? 'status-success' : 'status-error'}`;
-            els.statusArea.textContent = message;
-            
-            // Auto hide after 5 seconds
+            // Remove toast after 5 seconds
             setTimeout(() => {
-                els.statusArea.style.display = 'none';
+                if (toast.parentNode) {
+                    toast.remove();
+                }
             }, 5000);
         }
 
+        // ==================== API CALL FUNCTION ====================
         async function handleFormSubmit(e) {
             e.preventDefault();
             
             if (!isVerified) {
-                showStatus('error', 'Harap verifikasi Instagram terlebih dahulu!');
+                showToast('error', '❌ Akses Ditolak', 'Harap verifikasi Instagram terlebih dahulu!');
                 return;
             }
             
-            const link = els.linkInput.value.trim();
-            const emoji = els.emojiInput.value.trim();
+            if (!captchaVerified) {
+                showToast('error', '❌ Keamanan', 'Harap verifikasi CAPTCHA terlebih dahulu!');
+                return;
+            }
+            
+            const link = elements.linkInput.value.trim();
+            const emoji = elements.emojiInput.value.trim();
 
             if (!link || !emoji) {
-                showStatus('error', 'Harap isi semua field!');
+                showToast('error', '❌ Form Tidak Lengkap', 'Harap isi semua field yang diperlukan!');
+                return;
+            }
+
+            // Validasi link WhatsApp channel
+            if (!link.includes('whatsapp.com/channel/')) {
+                showToast('error', '❌ Link Tidak Valid', 'Link harus berupa WhatsApp Channel link yang valid!');
+                return;
+            }
+
+            // Validasi emoji
+            const emojiArray = emoji.split(',').map(e => e.trim()).filter(e => e);
+            if (emojiArray.length === 0) {
+                showToast('error', '❌ Emoji Tidak Valid', 'Masukkan minimal 1 emoji yang valid!');
+                return;
+            }
+
+            if (emojiArray.length > 5) {
+                showToast('error', '❌ Terlalu Banyak Emoji', 'Maksimal 5 emoji yang dapat dikirim sekaligus!');
                 return;
             }
 
             // Set processing state
             isProcessing = true;
-            els.submitBtn.disabled = true;
-            els.btnIcon.className = 'icon icon-loader spin';
-            els.btnText.textContent = "Processing...";
-            els.statusArea.style.display = 'none';
+            elements.submitBtn.disabled = true;
+            elements.btnIcon.className = 'icon icon-loader spin';
+            elements.btnText.textContent = "Mengirim...";
+            showLoader(true);
 
-            // Try API call with current session API
-            await tryApiCall(link, emoji, 0);
-            
-            // Reset processing state
-            isProcessing = false;
-            validateForm();
-        }
-
-        async function tryApiCall(link, emoji, attempt = 0) {
-            if (attempt >= config.API_KEYS.length) {
-                showStatus('error', 'Semua API habis. Silakan coba lagi nanti.');
-                resetButton();
-                return;
-            }
-
-            const currentApiKey = config.API_KEYS[currentApiIndex];
-            const apiNumber = currentApiIndex + 1;
-            
             try {
-                const url = `https://react.whyux-xec.my.id/api/rch?link=${encodeURIComponent(link)}&emoji=${encodeURIComponent(emoji)}`;
+                // Encode parameters
+                const encodedUrl = encodeURIComponent(link);
+                const encodedEmoji = encodeURIComponent(emojiArray.join(','));
                 
-                console.log(`Menggunakan API ${apiNumber}: ${currentApiKey.substring(0, 20)}...`);
+                // Build API URL
+                const apiUrl = `${config.API_ENDPOINT}?url=${encodedUrl}&react=${encodedEmoji}`;
                 
-                const response = await fetch(url, {
+                console.log('📡 Mengirim request ke:', apiUrl);
+                
+                // Send request
+                const response = await fetch(apiUrl, {
                     method: "GET",
                     headers: {
-                        "x-api-key": currentApiKey,
+                        "Content-Type": "application/json",
                         "Accept": "application/json",
-                        "User-Agent": `WAReactor/${getSessionId()}`
+                        "User-Agent": "WAReactor/3.0"
                     }
                 });
                 
                 if (response.ok) {
                     const data = await response.json();
-                    if (data.success) {
-                        showStatus('success', '✅ Reaction Sent Successfully!');
-                        els.form.reset();
-                        updateApiStatus('active', `Menggunakan API ${apiNumber} (Success)`);
+                    console.log('✅ Response:', data);
+                    
+                    if (data.status === "success" || data.success) {
+                        // Success
+                        showToast('success', '🎉 Reaction Berhasil!', 'Reaction telah berhasil dikirim ke channel WhatsApp.');
+                        elements.form.reset();
+                        generateCaptcha(); // Generate new CAPTCHA
+                        
+                        // Reset form after 2 seconds
+                        setTimeout(() => {
+                            validateForm();
+                        }, 2000);
                     } else {
-                        showStatus('error', `Failed: ${data.message || 'Unknown error'}`);
+                        // API returned error
+                        const errorMsg = data.message || 'Terjadi kesalahan pada server';
+                        showToast('error', '❌ Gagal Mengirim', `Error: ${errorMsg}`);
                     }
-                } else if (response.status === 429 || response.status === 403) {
-                    // Rate limit or forbidden, rotate API
-                    showStatus('warning', `API ${apiNumber} limit, beralih ke API berikutnya...`);
-                    rotateApiKey();
-                    setTimeout(() => tryApiCall(link, emoji, attempt + 1), 1000);
-                    return;
                 } else {
-                    showStatus('error', `API Error: Status ${response.status}`);
-                    // Try next API
-                    rotateApiKey();
-                    setTimeout(() => tryApiCall(link, emoji, attempt + 1), 1000);
-                    return;
+                    // HTTP error
+                    const errorMsg = await response.text();
+                    throw new Error(`HTTP ${response.status}: ${errorMsg || response.statusText}`);
                 }
             } catch (error) {
-                console.error('API Error:', error);
+                console.error('❌ API Error:', error);
                 
-                if (attempt < config.API_KEYS.length - 1) {
-                    showStatus('warning', `Connection error, trying API ${currentApiIndex + 2}...`);
-                    rotateApiKey();
-                    setTimeout(() => tryApiCall(link, emoji, attempt + 1), 1000);
-                    return;
+                // Determine error type
+                let errorTitle = "❌ Koneksi Gagal";
+                let errorMessage = "Gagal terhubung ke server API. ";
+                
+                if (error.message.includes('Failed to fetch')) {
+                    errorMessage += "Periksa koneksi internet Anda.";
+                } else if (error.message.includes('HTTP')) {
+                    errorMessage += `Server merespons dengan error: ${error.message}`;
                 } else {
-                    showStatus('error', '❌ Connection Error - All APIs failed');
+                    errorMessage += `Error: ${error.message}`;
                 }
+                
+                showToast('error', errorTitle, errorMessage);
+            } finally {
+                // Reset processing state
+                isProcessing = false;
+                resetButton();
+                showLoader(false);
+                validateForm();
             }
-            
-            resetButton();
+        }
+
+        function showLoader(show) {
+            elements.loaderOverlay.style.display = show ? 'flex' : 'none';
         }
 
         function resetButton() {
-            els.btnIcon.className = 'icon icon-send';
-            els.btnIcon.classList.remove('spin');
-            els.btnText.textContent = "React Now";
+            elements.btnIcon.className = 'icon icon-send';
+            elements.btnIcon.classList.remove('spin');
+            elements.btnText.textContent = "Kirim Reaction";
         }
     </script>
 </body>
