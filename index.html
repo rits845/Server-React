@@ -2,1792 +2,629 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WA Channel Reactor Pro - V3.0</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Froxz * Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
-
-        :root {
-            --bg-gradient-start: #0a0a0f;
-            --bg-gradient-end: #1a1a2e;
-            --card-bg: rgba(25, 25, 40, 0.85);
-            --card-border: rgba(99, 102, 241, 0.2);
-            --primary: #6366f1;
-            --primary-light: #818cf8;
-            --primary-dark: #4f46e5;
-            --primary-glow: rgba(99, 102, 241, 0.25);
-            --secondary: #10b981;
-            --secondary-light: #34d399;
-            --accent: #f59e0b;
-            --accent-light: #fbbf24;
-            --text-main: #f8fafc;
-            --text-secondary: #94a3b8;
-            --text-muted: #64748b;
-            --error: #ef4444;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --nav-bg: rgba(10, 10, 15, 0.92);
-            --input-bg: rgba(30, 41, 59, 0.4);
-            --code-bg: rgba(15, 23, 42, 0.9);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --instagram-gradient: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
-            --purple-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --green-gradient: linear-gradient(135deg, #10b981 0%, #34d399 100%);
-            --red-gradient: linear-gradient(135deg, #ef4444 0%, #f87171 100%);
-            --blue-gradient: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.3);
-            --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.2);
-            --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.1);
-        }
-
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-light);
-        }
-
         body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
-            color: var(--text-main);
+            background: #f2f6fc;
             min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.15) 0%, transparent 30%),
-                radial-gradient(circle at 80% 70%, rgba(16, 185, 129, 0.15) 0%, transparent 30%),
-                radial-gradient(circle at 40% 80%, rgba(245, 158, 11, 0.1) 0%, transparent 25%);
-            z-index: -2;
-            pointer-events: none;
-        }
-
-        .bg-noise {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        .floating-elements {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        .floating-element {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(60px);
-            opacity: 0.15;
-            animation: float 20s infinite ease-in-out;
-        }
-
-        .floating-element:nth-child(1) {
-            width: 400px;
-            height: 400px;
-            top: 10%;
-            left: 5%;
-            background: var(--primary);
-            animation-delay: 0s;
-        }
-
-        .floating-element:nth-child(2) {
-            width: 300px;
-            height: 300px;
-            top: 60%;
-            right: 5%;
-            background: var(--secondary);
-            animation-delay: 5s;
-        }
-
-        .floating-element:nth-child(3) {
-            width: 250px;
-            height: 250px;
-            bottom: 20%;
-            left: 15%;
-            background: var(--accent);
-            animation-delay: 10s;
-        }
-
-        @keyframes float {
-            0%, 100% { 
-                transform: translate(0, 0) scale(1) rotate(0deg); 
-            }
-            33% { 
-                transform: translate(30px, 40px) scale(1.05) rotate(120deg); 
-            }
-            66% { 
-                transform: translate(-20px, -20px) scale(0.95) rotate(240deg); 
-            }
-        }
-
-        /* Header */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: var(--nav-bg);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border-bottom: 1px solid var(--glass-border);
-            z-index: 1000;
-            padding: 0.75rem 0;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .header.scrolled {
-            box-shadow: var(--shadow-md);
-            padding: 0.5rem 0;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
+            padding: 10px 12px 80px;
+        }
+
+        .glass-header {
+            width: 100%;
+            max-width: 500px;
+            padding: 10px 16px;
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(12px);
+            border-radius: 40px;
+            border: 1px solid rgba(255,255,255,0.8);
+            box-shadow: 0 8px 20px -8px rgba(0,30,50,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 4px 0 12px;
         }
 
         .logo {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-weight: 800;
+            font-size: 1.25rem;
+            background: linear-gradient(145deg, #0b1f33, #1a3b54);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             display: flex;
             align-items: center;
-            gap: 12px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            background: var(--purple-gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
+            gap: 6px;
         }
+        .logo i { font-size: 1.4rem; }
 
-        .logo:hover {
-            transform: translateY(-2px);
-            filter: drop-shadow(0 5px 15px rgba(99, 102, 241, 0.3));
-        }
-
-        .logo-icon {
+        .menu-btn {
+            background: white;
             width: 40px;
             height: 40px;
-            background: var(--purple-gradient);
-            border-radius: 12px;
+            border-radius: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 8px 32px rgba(99, 102, 241, 0.4);
-            transition: all 0.4s ease;
-        }
-
-        .logo-icon svg {
-            width: 20px;
-            height: 20px;
-            fill: white;
-        }
-
-        .logo:hover .logo-icon {
-            transform: rotate(15deg) scale(1.1);
-            box-shadow: 0 12px 40px rgba(99, 102, 241, 0.6);
-        }
-
-        /* Navigation */
-        .desktop-nav {
-            display: none;
-            gap: 2.5rem;
-            font-weight: 600;
-            font-family: 'Space Grotesk', sans-serif;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-        }
-
-        .desktop-nav a {
-            position: relative;
-            padding: 0.5rem 0;
-            color: var(--text-secondary);
-            transition: all 0.3s ease;
-        }
-
-        .desktop-nav a::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 2px;
-            background: var(--purple-gradient);
-            border-radius: 2px;
-            transition: width 0.3s ease;
-        }
-
-        .desktop-nav a:hover {
-            color: var(--text-main);
-        }
-
-        .desktop-nav a:hover::before {
-            width: 100%;
-        }
-
-        /* Mobile Menu */
-        .mobile-toggle {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            background: var(--input-bg);
-            border: 1px solid var(--glass-border);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .mobile-toggle:hover {
-            background: var(--primary);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
-        }
-
-        .mobile-menu {
-            position: fixed;
-            inset: 0;
-            background: rgba(10, 10, 15, 0.98);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            z-index: 999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 1.5rem;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            transform: translateY(-20px);
-        }
-
-        .mobile-menu.open {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .mobile-link {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.75rem;
-            font-weight: 700;
-            position: relative;
-            padding: 1rem 2rem;
-            border-radius: 16px;
-            transition: all 0.3s ease;
-            background: var(--input-bg);
-            border: 1px solid var(--glass-border);
-            color: var(--text-secondary);
-            width: 280px;
-            text-align: center;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .mobile-link:hover {
-            background: var(--purple-gradient);
-            color: white;
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-            border-color: transparent;
-        }
-
-        /* Main Content */
-        .main-content {
-            width: 100%;
-            max-width: 900px;
-            margin: 100px auto 60px;
-            padding: 0 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        /* Card */
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 2.5rem;
-            position: relative;
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            box-shadow: var(--shadow-md);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow: hidden;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, 
-                transparent, 
-                var(--primary-light), 
-                var(--secondary-light), 
-                transparent
-            );
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
-            border-color: rgba(99, 102, 241, 0.3);
-        }
-
-        .card-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.75rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
-            text-transform: uppercase;
-            letter-spacing: -0.5px;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid var(--glass-border);
-            background: var(--purple-gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            position: relative;
-        }
-
-        .card-title::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 80px;
-            height: 2px;
-            background: var(--purple-gradient);
-            border-radius: 1px;
-        }
-
-        /* Badge */
-        .badge {
-            position: absolute;
-            top: -12px;
-            right: 2rem;
-            background: var(--purple-gradient);
-            padding: 0.5rem 1.5rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            box-shadow: 0 8px 32px rgba(99, 102, 241, 0.4);
-            transform: rotate(3deg);
-            z-index: 2;
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            font-family: 'Space Grotesk', sans-serif;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        /* Form Elements */
-        .form-group {
-            margin-bottom: 1.75rem;
-        }
-
-        .form-label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-secondary);
-            font-family: 'Space Grotesk', sans-serif;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 1rem 1.25rem;
-            background: var(--input-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            color: var(--text-main);
-            outline: none;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .form-input:focus {
-            border-color: var(--primary);
-            box-shadow: 
-                0 0 0 4px var(--primary-glow),
-                var(--shadow-sm);
-            transform: translateY(-2px);
-            background: rgba(30, 41, 59, 0.6);
-        }
-
-        /* Buttons */
-        .btn {
-            padding: 1rem 2rem;
-            border-radius: 12px;
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            color: #1e2f3c;
+            font-size: 1.2rem;
             cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 0.75rem;
-            position: relative;
-            overflow: hidden;
-            border: none;
         }
 
-        .btn-primary {
+        .hero-container {
+            max-width: 500px;
             width: 100%;
-            background: var(--purple-gradient);
-            color: white;
-            box-shadow: 0 8px 32px rgba(99, 102, 241, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 16px 48px rgba(99, 102, 241, 0.4);
-            letter-spacing: 1.2px;
-        }
-
-        .btn-primary:disabled {
-            background: linear-gradient(135deg, #4b5563 0%, #6b7280 100%);
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-            opacity: 0.7;
-        }
-
-        .btn-instagram {
-            width: 100%;
-            background: var(--instagram-gradient);
-            color: white;
-            box-shadow: 0 8px 32px rgba(225, 48, 108, 0.2);
-            margin-bottom: 1.5rem;
-        }
-
-        .btn-instagram:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 16px 48px rgba(225, 48, 108, 0.3);
-        }
-
-        /* Verified Badge */
-        .verified-badge {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--success);
-            padding: 1rem;
-            border-radius: 12px;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            border: 1px solid rgba(16, 185, 129, 0.2);
-            font-family: 'Space Grotesk', sans-serif;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            animation: pulseSuccess 2s infinite;
-        }
-
-        @keyframes pulseSuccess {
-            0%, 100% { 
-                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
-                transform: scale(1);
-            }
-            50% { 
-                box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
-                transform: scale(1.02);
-            }
-        }
-
-        /* CAPTCHA Section - DIPERBAIKI */
-        .captcha-container {
-            margin: 2rem 0;
-            padding: 1.5rem;
-            background: var(--input-bg);
-            border-radius: 16px;
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(10px);
-        }
-
-        .captcha-header {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1.25rem;
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 600;
-            color: var(--text-main);
-            font-size: 1.1rem;
-        }
-
-        .captcha-challenge {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            padding: 1.5rem;
-            background: rgba(15, 23, 42, 0.5);
-            border-radius: 12px;
-            border: 2px solid var(--primary);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .captcha-label {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
-        }
-
-        .captcha-text {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            letter-spacing: 8px;
-            color: var(--text-main);
-            padding: 1rem 2rem;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 12px;
-            user-select: none;
-            min-width: 280px;
-            text-align: center;
-            border: 2px solid var(--primary);
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .captcha-input-wrapper {
-            position: relative;
-            width: 100%;
-            margin-bottom: 1rem;
-        }
-
-        .captcha-input {
-            width: 100%;
-            padding: 1rem 1.25rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid var(--glass-border);
-            border-radius: 12px;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.25rem;
-            color: var(--text-main);
-            outline: none;
-            transition: all 0.3s ease;
-            text-align: center;
-            letter-spacing: 3px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .captcha-input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px var(--primary-glow);
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .captcha-input.correct {
-            border-color: var(--success);
-            background: rgba(16, 185, 129, 0.1);
-        }
-
-        .captcha-input.error {
-            border-color: var(--error);
-            background: rgba(239, 68, 68, 0.1);
-        }
-
-        .captcha-buttons {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .captcha-btn {
-            flex: 1;
-            padding: 0.875rem;
-            border-radius: 10px;
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border: 2px solid;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-
-        .captcha-refresh {
-            background: transparent;
-            color: var(--primary);
-            border-color: var(--primary);
-        }
-
-        .captcha-refresh:hover {
-            background: rgba(99, 102, 241, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .captcha-verify {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-
-        .captcha-verify:hover {
-            background: var(--primary-light);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
-        }
-
-        .captcha-verify:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .captcha-verified {
-            background: var(--green-gradient) !important;
-            border-color: var(--secondary) !important;
-            cursor: default !important;
-        }
-
-        .captcha-error {
-            color: var(--error);
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-            text-align: center;
-            display: none;
-            font-weight: 600;
-            animation: shake 0.5s ease;
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
-        }
-
-        /* Toast Notifications */
-        .toast-container {
-            position: fixed;
-            top: 100px;
-            right: 2rem;
-            z-index: 10000;
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-            max-width: 400px;
-        }
-
-        .toast {
-            padding: 1.25rem;
-            border-radius: 16px;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            animation: slideInRight 0.3s ease, fadeOut 0.3s ease 4.7s forwards;
-            box-shadow: var(--shadow-md);
-            max-width: 400px;
-        }
-
-        .toast.success {
-            background: rgba(16, 185, 129, 0.15);
-            border-color: rgba(16, 185, 129, 0.3);
-            color: var(--success);
-        }
-
-        .toast.error {
-            background: rgba(239, 68, 68, 0.15);
-            border-color: rgba(239, 68, 68, 0.3);
-            color: var(--error);
-        }
-
-        .toast.info {
-            background: rgba(59, 130, 246, 0.15);
-            border-color: rgba(59, 130, 246, 0.3);
-            color: #60a5fa;
-        }
-
-        .toast-icon {
-            width: 24px;
-            height: 24px;
-            flex-shrink: 0;
-        }
-
-        .toast-content {
-            flex: 1;
-        }
-
-        .toast-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            margin-bottom: 0.25rem;
-            font-size: 1rem;
-            letter-spacing: 0.5px;
-        }
-
-        .toast-message {
-            font-size: 0.9rem;
-            opacity: 0.9;
-            line-height: 1.4;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 3px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 2px;
-            overflow: hidden;
-            margin-top: 0.5rem;
-        }
-
-        .progress-fill {
-            height: 100%;
-            width: 100%;
-            background: currentColor;
-            animation: progress 5s linear forwards;
-            transform-origin: left;
-        }
-
-        @keyframes slideInRight {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes fadeOut {
-            to {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-        }
-
-        @keyframes progress {
-            from { transform: scaleX(1); }
-            to { transform: scaleX(0); }
-        }
-
-        /* Donation Section - DIPERBAIKI */
-        .donation-content {
-            text-align: center;
-        }
-
-        .donation-image {
-            width: 100%;
-            max-width: 320px;
-            margin: 1.5rem auto;
-            border-radius: 16px;
-            border: 2px solid var(--glass-border);
-            box-shadow: var(--shadow-lg);
-            transition: all 0.4s ease;
-            display: block;
-        }
-
-        .donation-image:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 24px 72px rgba(0, 0, 0, 0.4);
-            border-color: var(--primary);
-        }
-
-        .donation-note {
-            margin-top: 1rem;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        /* Developer Section */
-        .code-block {
-            background: var(--code-bg);
-            color: var(--text-secondary);
-            padding: 1.5rem;
-            border-radius: 12px;
-            border: 1px solid var(--glass-border);
-            font-family: 'Monaco', 'Consolas', 'Courier New', monospace;
-            font-size: 0.9rem;
-            line-height: 1.6;
-            overflow-x: auto;
-            margin: 1rem 0;
-            position: relative;
-        }
-
-        .code-block::before {
-            content: 'API Request';
-            position: absolute;
-            top: -10px;
-            left: 1rem;
-            background: var(--code-bg);
-            padding: 0.25rem 0.75rem;
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-radius: 6px;
-            font-family: 'Space Grotesk', sans-serif;
-            border: 1px solid var(--glass-border);
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            padding: 2rem;
-            background: rgba(10, 10, 15, 0.8);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-top: 1px solid var(--glass-border);
-            margin-top: 4rem;
-            letter-spacing: 0.5px;
-        }
-
-        .footer-content {
-            max-width: 600px;
             margin: 0 auto;
         }
 
-        /* Loader */
-        .loader-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(10, 10, 15, 0.8);
-            backdrop-filter: blur(10px);
-            display: none;
+        /* TAMPILAN HOME - HANYA PRODUK UTAMA */
+        .spotlight-card {
+            background: linear-gradient(135deg, #ffffff, #f0f7ff);
+            backdrop-filter: blur(16px);
+            border-radius: 40px;
+            padding: 24px 20px;
+            border: 1px solid rgba(255,255,255,0.6);
+            box-shadow: 0 25px 40px -15px rgba(0,68,128,0.25);
+            margin: 10px 0 20px;
+            border-left: 5px solid #25D366;
+        }
+
+        .product-row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: nowrap;
+        }
+
+        .img-small {
+            flex: 0 0 110px;
+        }
+        .img-small img {
+            width: 110px;
+            height: 110px;
+            border-radius: 28px;
+            background: white;
+            object-fit: contain;
+            padding: 10px;
+            border: 3px solid white;
+            box-shadow: 0 10px 20px rgba(0,30,50,0.15);
+        }
+
+        .info-small {
+            flex: 1;
+        }
+        .cat-badge {
+            background: #d4e3ff;
+            color: #004080;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 5px 14px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-bottom: 6px;
+            letter-spacing: 0.3px;
+        }
+        .info-small h2 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            line-height: 1.2;
+            background: linear-gradient(145deg, #0f2027, #1d3b4f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 4px;
+        }
+        .price {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #0b2840;
+            letter-spacing: -0.5px;
+            margin: 8px 0 12px;
+        }
+        .price small {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #4b6f8c;
+        }
+
+        /* TOMBOL BELI DIDESAIN ULANG - LEBIH BAGUS */
+        .btn-buy-premium {
+            background: linear-gradient(145deg, #0b2840, #1d4b70);
+            border: none;
+            color: white;
+            padding: 10px 20px; (vertical 10px, horizontal 20px)
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            z-index: 2000;
+            gap: 12px;
+            margin-top: 8px;
+            box-shadow: 0 12px 25px -5px #0b2840cc;
+            cursor: pointer;
+            width: 100%;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.2s ease;
+            letter-spacing: 0.5px;
         }
-
-        .loader {
-            width: 60px;
-            height: 60px;
-            border: 4px solid rgba(99, 102, 241, 0.3);
+        .btn-buy-premium i {
+            font-size: 1.2rem;
+            background: white;
+            color: #0b2840;
+            padding: 5px;
             border-radius: 50%;
-            border-top-color: var(--primary);
-            animation: spin 1s ease-in-out infinite;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-buy-premium:hover {
+            transform: scale(1.02);
+            background: linear-gradient(145deg, #1d3b5a, #2b5a88);
+            box-shadow: 0 15px 30px -3px #0b2840;
         }
 
-        @keyframes spin {
-            100% { transform: rotate(360deg); }
+        .feature-mini {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            background: rgba(255,255,255,0.5);
+            padding: 12px 16px;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.7);
+        }
+        .feature-mini span {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #1d405b;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
-        /* Responsive */
-        @media(min-width: 768px) {
-            .mobile-toggle { display: none; }
-            .desktop-nav { display: flex; }
-            .main-content { max-width: 800px; }
-            
-            .captcha-challenge {
-                flex-direction: row;
-                justify-content: center;
-                align-items: center;
-            }
-            
-            .captcha-label {
-                font-size: 1rem;
-            }
+        /* sidebar */
+        .sidebar-overlay {
+            position: fixed; inset: 0; background: rgba(0,20,30,0.5); z-index: 1001;
+            opacity: 0; pointer-events: none; transition: 0.3s; backdrop-filter: blur(4px);
+        }
+        .sidebar-overlay.active { opacity: 1; pointer-events: all; }
+
+        .sidebar {
+            width: 260px; position: fixed; left: -280px; top: 0; bottom: 0;
+            background: rgba(255,255,255,0.9); backdrop-filter: blur(30px);
+            z-index: 1002; padding: 20px 16px; transition: 0.3s;
+            border-right: 1px solid rgba(255,255,255,0.5);
+        }
+        .sidebar.active { left: 0; }
+
+        /* MODAL */
+        .modal {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 2000;
+            display: none; align-items: flex-end; opacity: 0; transition: 0.2s;
+        }
+        .modal.active { display: flex; opacity: 1; }
+        .modal-content {
+            background: #ffffff;
+            width: 100%; border-radius: 30px 30px 0 0; padding: 24px 20px 30px;
+            transform: translateY(100%); transition: 0.3s;
+            max-height: 90vh; overflow-y: auto;
+        }
+        .modal.active .modal-content { transform: translateY(0); }
+        @media (min-width: 500px) {
+            .modal { align-items: center; justify-content: center; }
+            .modal-content { width: 420px; border-radius: 40px; transform: translateY(20px); }
         }
 
-        @media(max-width: 768px) {
-            .card { padding: 2rem; }
-            .card-title { font-size: 1.5rem; }
-            .nav-container { padding: 0 1.5rem; }
-            .main-content { margin: 90px auto 40px; padding: 0 1.5rem; }
-            .badge { right: 1.5rem; }
-            .captcha-text {
-                font-size: 2rem;
-                letter-spacing: 6px;
-                min-width: 240px;
-                padding: 0.75rem 1.5rem;
-            }
-            .toast-container {
-                left: 1.5rem;
-                right: 1.5rem;
-                max-width: none;
-            }
-            .donation-image {
-                max-width: 280px;
-            }
+        /* QRIS DIPERBESAR SIGNIFIKAN AGAR MUDAH DI-SCAN */
+        .qris-detail {
+            background: linear-gradient(145deg, #f0f7ff, #ffffff);
+            border: 2px solid #0b2840;
+            border-radius: 32px;
+            padding: 20px 16px;
+            margin: 10px 0 12px;
+            text-align: center;
+        }
+        .qris-image {
+            width: 280px;  /* Diperbesar dari 220px menjadi 280px */
+            height: 280px; /* Diperbesar dari 220px menjadi 280px */
+            margin: 15px auto;
+            background: white;
+            border-radius: 32px;
+            padding: 15px;
+            box-shadow: 0 20px 30px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .qris-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        .qris-header {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #0b2840;
+            margin-bottom: 4px;
+        }
+        .qris-subheader {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #1d4e7c;
+            margin-bottom: 8px;
+        }
+        .qris-nmid {
+            background: #e9f2fc;
+            padding: 12px;
+            border-radius: 40px;
+            font-family: monospace;
+            font-size: 1rem;
+            font-weight: 700;
+            border: 1px dashed #0b2840;
+            margin: 12px 0 8px;
+        }
+        .qris-tagline {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #0b2840;
+            margin: 5px 0;
+        }
+        .qris-tagline-small {
+            font-size: 0.75rem;
+            color: #3f6482;
+            margin-bottom: 8px;
+        }
+        .btn-outline-qris {
+            background: #dcebff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            margin: 8px 0 4px;
+            color: #0b2840;
+            cursor: pointer;
         }
 
-        @media(max-width: 480px) {
-            .card { padding: 1.5rem; }
-            .card-title { font-size: 1.3rem; gap: 0.75rem; }
-            .logo { font-size: 1.2rem; }
-            .logo-icon { width: 36px; height: 36px; }
-            .captcha-text {
-                font-size: 1.75rem;
-                letter-spacing: 4px;
-                min-width: 200px;
-                padding: 0.5rem 1rem;
-            }
-            .captcha-buttons {
-                flex-direction: column;
-            }
-            .mobile-link {
-                width: 240px;
-                font-size: 1.5rem;
-                padding: 0.875rem 1.5rem;
-            }
+        /* FORM UPLOAD DAN INPUT */
+        .form-group {
+            margin-bottom: 16px;
+            text-align: left;
+        }
+        .form-group label {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #1d405b;
+            display: block;
+            margin-bottom: 6px;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 40px;
+            border: 1px solid #c9daea;
+            background: #f9fcff;
+            font-size: 0.95rem;
+        }
+        .form-group textarea {
+            border-radius: 24px;
+            resize: vertical;
+            min-height: 80px;
+        }
+        .upload-btn {
+            background: #e9f2fc;
+            border: 2px dashed #0b2840;
+            border-radius: 40px;
+            padding: 14px;
+            text-align: center;
+            color: #0b2840;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+        }
+        .upload-btn input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        .file-name {
+            font-size: 0.8rem;
+            color: #3f6482;
+            margin-top: 6px;
         }
 
-        /* Icons */
-        .icon {
-            width: 24px;
-            height: 24px;
-            display: inline-block;
-            vertical-align: middle;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
+        .pay-btn-telegram {
+            width: 100%;
+            background: #0088cc;
+            color: white;
+            padding: 16px;
+            border: none;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin: 20px 0 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
-        .icon-lg {
-            width: 32px;
-            height: 32px;
-        }
-
-        .icon-zap {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='13 2 3 14 12 14 11 22 21 10 12 10 13 2'%3E%3C/polygon%3E%3C/svg%3E");
-        }
-
-        .icon-instagram {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23E1306C'%3E%3Cpath d='M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z'/%3E%3C/svg%3E");
-        }
-
-        .icon-check {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2310b981' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
-        }
-
-        .icon-error {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ef4444' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cline x1='15' y1='9' x2='9' y2='15'%3E%3C/line%3E%3Cline x1='9' y1='9' x2='15' y2='15'%3E%3C/line%3E%3C/svg%3E");
-        }
-
-        .icon-shield {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'%3E%3C/path%3E%3C/svg%3E");
-        }
-
-        .icon-refresh {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M23 4v6h-6'%3E%3C/path%3E%3Cpath d='M1 20v-6h6'%3E%3C/path%3E%3Cpath d='M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15'%3E%3C/path%3E%3C/svg%3E");
-        }
-
-        .icon-heart {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ef4444' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z'%3E%3C/path%3E%3C/svg%3E");
-        }
-
-        .icon-code {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2310b981' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='16 18 22 12 16 6'%3E%3C/polyline%3E%3Cpolyline points='8 6 2 12 8 18'%3E%3C/polyline%3E%3C/svg%3E");
-        }
-
-        .icon-send {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='22' y1='2' x2='11' y2='13'%3E%3C/line%3E%3Cpolygon points='22 2 15 22 11 13 2 9 22 2'%3E%3C/polygon%3E%3C/svg%3E");
-        }
-
-        .icon-loader {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='12' y1='2' x2='12' y2='6'%3E%3C/line%3E%3Cline x1='12' y1='18' x2='12' y2='22'%3E%3C/line%3E%3Cline x1='4.93' y1='4.93' x2='7.76' y2='7.76'%3E%3C/line%3E%3Cline x1='16.24' y1='16.24' x2='19.07' y2='19.07'%3E%3C/line%3E%3Cline x1='2' y1='12' x2='6' y2='12'%3E%3C/line%3E%3Cline x1='18' y1='12' x2='22' y2='12'%3E%3C/line%3E%3Cline x1='4.93' y1='19.07' x2='7.76' y2='16.24'%3E%3C/line%3E%3Cline x1='16.24' y1='7.76' x2='19.07' y2='4.93'%3E%3C/line%3E%3C/svg%3E");
-        }
-
-        .icon-menu {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='3' y1='12' x2='21' y2='12'%3E%3C/line%3E%3Cline x1='3' y1='6' x2='21' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='18' x2='21' y2='18'%3E%3C/line%3E%3C/svg%3E");
-        }
-
-        .icon-x {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E");
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 10px;
+            color: #0088cc;
         }
     </style>
 </head>
 <body>
-    <!-- Background Elements -->
-    <div class="bg-noise"></div>
-    <div class="floating-elements">
-        <div class="floating-element"></div>
-        <div class="floating-element"></div>
-        <div class="floating-element"></div>
+
+<div class="glass-header">
+    <div class="logo"><i class="fas fa-bolt"></i> Froxz</div>
+    <div class="menu-btn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></div>
+</div>
+
+<!-- sidebar -->
+<div class="sidebar-overlay" id="overlay" onclick="toggleSidebar()"></div>
+<aside class="sidebar" id="sidebar">
+    <div style="display: flex; justify-content: space-between; margin-bottom: 24px;">
+        <span style="font-weight: 700;">menu</span>
+        <i class="fas fa-times" onclick="toggleSidebar()" style="font-size: 1.2rem; cursor: pointer;"></i>
     </div>
-
-    <!-- Toast Container -->
-    <div class="toast-container" id="toastContainer"></div>
-
-    <!-- Loader -->
-    <div class="loader-overlay" id="loaderOverlay">
-        <div class="loader"></div>
-    </div>
-
-    <!-- Mobile Menu -->
-    <nav id="mobileNav" class="mobile-menu">
-        <a href="#reactor" class="mobile-link js-nav">Reactor</a>
-        <a href="#donation" class="mobile-link js-nav">Donasi</a>
-        <a href="#developer" class="mobile-link js-nav">Developer</a>
+    <nav style="display: flex; flex-direction: column; gap: 12px;">
+        <a href="#" class="nav-item active"><i class="fas fa-home"></i> Beranda</a>
+        <a href="#" class="nav-item"><i class="fas fa-clock"></i> Pesanan</a>
+        <a href="#" class="nav-item"><i class="fas fa-headset"></i> Bantuan</a>
     </nav>
+    <div style="margin-top: 30px; border-top: 1px solid #ccc; padding-top: 16px;">
+        <details style="margin-bottom: 8px;">
+            <summary style="font-weight: 600;">📘 cara beli</summary>
+            <p style="font-size: 0.8rem; margin-top: 6px;">Klik beli → upload bukti → isi data → konfirmasi Telegram</p>
+        </details>
+    </div>
+</aside>
 
-    <!-- Header -->
-    <header class="header" id="header">
-        <div class="nav-container">
-            <div class="logo">
-                <div class="logo-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-                    </svg>
-                </div>
-                <span>WA Reactor Pro</span>
+<!-- konten utama - HANYA PRODUK REACTION SALURAN -->
+<div class="hero-container">
+    <!-- Spotlight card dengan produk unggulan (logo WhatsApp) - TOMBOL BELI SUDAH DIPERBAIKI -->
+    <div class="spotlight-card">
+        <div class="product-row">
+            <div class="img-small">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Logo" style="padding: 5px;">
             </div>
-            
-            <nav class="desktop-nav">
-                <a href="#reactor">Reactor</a>
-                <a href="#donation">Donasi</a>
-                <a href="#developer">Developer</a>
-            </nav>
-            
-            <button id="menuBtn" class="mobile-toggle" aria-label="Toggle Menu">
-                <div class="icon icon-menu" id="menuIcon"></div>
+            <div class="info-small">
+                <span class="cat-badge"><i class="fas fa-crown"></i> #1 POPULER</span>
+                <h2>Reaction Saluran WA</h2>
+                <div class="price">Rp200 <small>/1.000 Emoji</small></div>
+                <!-- TOMBOL BELI BARU YANG LEBIH BAGUS -->
+                <button class="btn-buy-premium" onclick="openModal('Reaction Saluran WhatsApp', 'Rp 200 / 1.000 Emoji')">
+                    <i class="fas fa-bolt"></i> BELI SEKARANG
+                </button>
+            </div>
+        </div>
+        <div class="feature-mini">
+            <span><i class="fas fa-bolt"></i> Proses Instan</span>
+            <span><i class="fas fa-shield-alt"></i> Garansi 100%</span>
+            <span><i class="fas fa-qrcode"></i> Bayar via QRIS</span>
+            <span><i class="fab fa-telegram"></i> Konfirmasi Telegram</span>
+        </div>
+    </div>
+    
+    <!-- Informasi tambahan agar tidak kosong -->
+    <div style="background: rgba(255,255,255,0.5); border-radius: 24px; padding: 16px; margin-top: 20px; border: 1px solid rgba(255,255,255,0.8); text-align: center;">
+        <p style="color: #1d405b; font-weight: 500;"><i class="fas fa-info-circle"></i> Layanan Reaction Saluran WhatsApp</p>
+        <p style="font-size: 0.85rem; color: #3f6482; margin-top: 8px;">🏆 100% aman & cepat • Sudah dipercaya 5.000+ pelanggan</p>
+    </div>
+</div>
+
+<!-- MODAL BAYAR + QRIS DIPERBESAR + UPLOAD + TELEGRAM OTOMATIS -->
+<div class="modal" id="payModal">
+    <div class="modal-content">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <h3 style="font-weight: 800;" id="mTitle">Reaction Saluran WhatsApp</h3>
+            <span onclick="closeModal()" style="font-size: 2rem; line-height: 1; cursor: pointer;">&times;</span>
+        </div>
+        <h2 style="color: #0b2840; margin-bottom: 16px;" id="mPrice">Rp 200 / 1.000 Emoji</h2>
+
+        <!-- QRIS DENGAN GAMBAR - DIPERBESAR AGAR MUDAH DI-SCAN -->
+        <div class="qris-detail">
+            <div class="qris-header">
+                <i class="fas fa-qrcode"></i> TOKO BERKAH JAYA SEM...
+            </div>
+            <div class="qris-subheader">
+                NMID : ID1025411901735
+            </div>
+            <div class="qris-image">
+                <!-- Gambar QRIS sesuai file Anda (tidak diubah) - UKURAN DIPERBESAR -->
+                <img src="https://files.catbox.moe/6cfesw.jpeg" alt="QRIS TOKO BERKAH">
+            </div>
+            <div class="qris-tagline">
+                A01 · SATU QRIS UNTUK SEMUA
+            </div>
+            <div class="qris-nmid">
+                HARAP BAYAR RP 200
+            </div>
+            <div class="qris-tagline-small">
+                Cek aplikasi penyelenggara di:<br> www.aspi-qris.id
+            </div>
+            <button class="btn-outline-qris" onclick="copyText('RP 200')">
+                <i class="far fa-copy"></i> Salin Nominal
             </button>
         </div>
-    </header>
 
-    <!-- Main Content -->
-    <main class="main-content">
-        
-        <!-- Reactor Section -->
-        <section id="reactor" class="card">
-            <div class="badge">V3.0</div>
-            <h1 class="card-title">
-                <div class="icon icon-zap icon-lg"></div>
-                WhatsApp Channel Reactor
-            </h1>
-
-            <!-- Verification Section -->
-            <div id="verificationSection">
-                <button id="verifyBtn" class="btn btn-instagram">
-                    <div class="icon icon-instagram icon-lg"></div>
-                    <span id="verifyText">Verifikasi Instagram untuk React</span>
-                </button>
-                
-                <div id="verifiedBadge" class="verified-badge" style="display: none;">
-                    <div class="icon icon-check icon-lg"></div>
-                    <span>✅ Akun Terverifikasi - Reactor Siap Digunakan!</span>
-                </div>
-                
-                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 12px; border: 1px solid rgba(99, 102, 241, 0.2);">
-                    <p style="text-align: center; color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
-                        <strong>⚠️ Penting:</strong> Verifikasi Instagram diperlukan untuk menggunakan fitur Reactor. 
-                        Follow Instagram admin kami untuk mengaktifkan tool ini.
-                    </p>
-                </div>
-            </div>
-
-            <form id="reactorForm">
-                <div class="form-group">
-                    <label class="form-label" for="link">🔗 Link Channel WhatsApp</label>
-                    <input type="url" id="link" class="form-input" placeholder="https://whatsapp.com/channel/..." required autocomplete="off">
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label" for="emoji">😊 Emoji Reaction (pisahkan dengan koma)</label>
-                    <input type="text" id="emoji" class="form-input" placeholder="🔥,❤️,💸,👍,😍" required autocomplete="off">
-                    <small style="display: block; margin-top: 0.5rem; color: var(--text-muted); font-size: 0.85rem;">
-                        Contoh: 🔥,❤️,💸 (bisa menggunakan 1-5 emoji, pisahkan dengan koma)
-                    </small>
-                </div>
-                
-                <!-- CAPTCHA Section - DIPERBAIKI -->
-                <div class="captcha-container">
-                    <div class="captcha-header">
-                        <div class="icon icon-shield"></div>
-                        <span>Verifikasi Keamanan</span>
-                    </div>
-                    
-                    <div class="captcha-challenge">
-                        <div class="captcha-label">Masukkan kode di bawah:</div>
-                        <div class="captcha-text" id="captchaText">ABC12</div>
-                    </div>
-                    
-                    <div class="captcha-input-wrapper">
-                        <input type="text" 
-                               id="captchaInput" 
-                               class="captcha-input" 
-                               placeholder="Ketik kode keamanan di atas" 
-                               maxlength="6"
-                               autocomplete="off">
-                    </div>
-                    
-                    <div class="captcha-error" id="captchaError">
-                        Kode verifikasi salah! Silakan coba lagi.
-                    </div>
-                    
-                    <div class="captcha-buttons">
-                        <button type="button" class="captcha-btn captcha-refresh" id="refreshCaptcha">
-                            <div class="icon icon-refresh"></div>
-                            Refresh Kode
-                        </button>
-                        <button type="button" class="captcha-btn captcha-verify" id="verifyCaptcha" disabled>
-                            Verifikasi CAPTCHA
-                        </button>
-                    </div>
-                </div>
-
-                <button type="submit" id="submitBtn" class="btn btn-primary" disabled>
-                    <div class="icon icon-send" id="btnIcon"></div>
-                    <span id="btnText">Kirim Reaction</span>
-                </button>
-            </form>
-        </section>
-
-        <!-- Donation Section - DIPERBAIKI -->
-        <section id="donation" class="card">
-            <h2 class="card-title">
-                <div class="icon icon-heart icon-lg"></div>
-                Dukungan & Donasi
-            </h2>
-            <div class="donation-content">
-                <p style="margin-bottom: 1.5rem; font-weight: 500; color: var(--text-secondary); line-height: 1.6;">
-                    Bantu kami terus mengembangkan alat ini dengan donasi. Setiap kontribusi sangat berarti untuk menjaga server tetap aktif dan mengembangkan fitur terbaru.
-                </p>
-                
-                <div style="margin: 2rem 0;">
-                    <img src="https://files.catbox.moe/ee75hf.jpeg" 
-                         alt="QRIS Donation" 
-                         class="donation-image"
-                         onerror="this.onerror=null; this.src='https://via.placeholder.com/320x320/6366f1/ffffff?text=QRIS+Donation'">
-                </div>
-                
-                <p class="donation-note">
-                    Scan QRIS di atas untuk donasi via e-wallet, mobile banking, atau aplikasi pembayaran digital lainnya.<br>
-                    Terima kasih atas dukungan Anda! 🙏
-                </p>
-            </div>
-        </section>
-
-        <!-- Developer Section -->
-        <section id="developer" class="card">
-            <h2 class="card-title">
-                <div class="icon icon-code icon-lg"></div>
-                Untuk Developer
-            </h2>
-            <p style="margin-bottom: 1.5rem; font-weight: 500; color: var(--text-secondary); line-height: 1.6;">
-                API endpoint baru untuk integrasi dengan aplikasi Anda.
-            </p>
-            
+        <!-- FORM UPLOAD BUKTI TRANSFER & INPUTAN -->
+        <div style="margin: 20px 0 10px;">
             <div class="form-group">
-                <label class="form-label">🌐 Endpoint API</label>
-                <input type="text" class="form-input" value="Haduhhh" readonly>
+                <label><i class="fas fa-upload"></i> Upload Bukti Transfer / Screenshot</label>
+                <div class="upload-btn">
+                    <i class="fas fa-cloud-upload-alt"></i> Pilih File
+                    <input type="file" id="buktiFile" accept="image/*" onchange="updateFileName(this)">
+                </div>
+                <div class="file-name" id="fileNameDisplay">Belum ada file dipilih</div>
             </div>
-            
-            <label class="form-label">📝 Contoh Request (cURL)</label>
-            <div class="code-block">
-                Waduhh 
-            </div>
-            
-            <div style="margin-top: 1.5rem; padding: 1.5rem; background: rgba(15, 23, 42, 0.5); border-radius: 12px; border: 1px solid var(--glass-border);">
-                <h4 style="margin-bottom: 12px; color: var(--text-main); font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem;">
-                    📋 Contoh Lengkap
-                </h4>
-                <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">
-                    <strong>URL:</strong><br>
-                    <code style="background: rgba(0,0,0,0.3); padding: 0.5rem; border-radius: 6px; display: block; margin: 0.5rem 0; word-break: break-all; font-size: 0.85rem;">
-                        
-                    </code>
-                    
-                    <strong>Response Format:</strong><br>
-                    <code style="background: rgba(0,0,0,0.3); padding: 0.5rem; border-radius: 6px; display: block; margin: 0.5rem 0; font-size: 0.85rem;">
-                        {<br>
-                        &nbsp;&nbsp;"status": "success",<br>
-                        &nbsp;&nbsp;"message": "Reaction sent successfully",<br>
-                        &nbsp;&nbsp;"timestamp": "2024-01-15T10:30:00Z"<br>
-                        }
-                    </code>
-                </p>
-            </div>
-        </section>
 
-    </main>
+            <div class="form-group">
+                <label><i class="fab fa-telegram"></i> Link Saluran WhatsApp nya:</label>
+                <input type="url" id="linkSaluran" placeholder="https://..." value="">
+            </div>
 
-    <footer class="footer">
-        <div class="footer-content">
-            &copy; 2025 WA Channel Reactor Pro. All rights reserved.
-            <div style="margin-top: 10px; font-size: 0.8rem; opacity: 0.7; letter-spacing: 0.3px;">
-                Automated WhatsApp Channel Reaction Tool v3.0
+            <div class="form-group">
+                <label><i class="far fa-smile"></i> Emoji yang diinginkan</label>
+                <input type="text" id="emojiInput" placeholder="Contoh: 🔥,👍,🎉" value="👍">
+            </div>
+
+            <div class="form-group">
+                <label><i class="far fa-sticky-note"></i> Catatan tambahan (opsional)</label>
+                <textarea id="catatanInput" placeholder="Tulis pesan tambahan..."></textarea>
             </div>
         </div>
-    </footer>
 
-    <script>
-        // Elements
-        const elements = {
-            // Navigation
-            nav: document.getElementById('mobileNav'),
-            menuBtn: document.getElementById('menuBtn'),
-            menuIcon: document.getElementById('menuIcon'),
-            
-            // Form
-            form: document.getElementById('reactorForm'),
-            submitBtn: document.getElementById('submitBtn'),
-            btnIcon: document.getElementById('btnIcon'),
-            btnText: document.getElementById('btnText'),
-            linkInput: document.getElementById('link'),
-            emojiInput: document.getElementById('emoji'),
-            
-            // Verification
-            verifyBtn: document.getElementById('verifyBtn'),
-            verifyText: document.getElementById('verifyText'),
-            verifiedBadge: document.getElementById('verifiedBadge'),
-            
-            // CAPTCHA
-            captchaText: document.getElementById('captchaText'),
-            captchaInput: document.getElementById('captchaInput'),
-            captchaError: document.getElementById('captchaError'),
-            refreshCaptcha: document.getElementById('refreshCaptcha'),
-            verifyCaptcha: document.getElementById('verifyCaptcha'),
-            
-            // UI
-            header: document.getElementById('header'),
-            toastContainer: document.getElementById('toastContainer'),
-            loaderOverlay: document.getElementById('loaderOverlay')
-        };
+        <!-- LOADING ANIMATION -->
+        <div class="loading" id="loading">
+            <i class="fas fa-spinner fa-spin"></i> Mengirim ke Telegram...
+        </div>
 
-        // Configuration
-        const config = {
-            API_ENDPOINT: "https://api-faa.my.id/faa/react-channel",
-            INSTAGRAM_URL: "https://www.instagram.com/ritzxza?igsh=d21maDEwYmZsZXlq",
-            INSTAGRAM_ACCOUNT: "@ritzxza"
-        };
+        <!-- TOMBOL KONFIRMASI KE TELEGRAM -->
+        <button class="pay-btn-telegram" onclick="sendToTelegram()">
+            <i class="fab fa-telegram-plane"></i> Kirim Pesanan
+        </button>
+        <p style="font-size:0.65rem; color:#6f8fb2; text-align:center;">Foto + text akan dikirim otomatis ke admin</p>
+    </div>
+</div>
 
-        // State
-        let isMenuOpen = false;
-        let isVerified = localStorage.getItem('igVerified') === 'true';
-        let captchaVerified = false;
-        let currentCaptcha = "";
-        let isProcessing = false;
+<script>
+    // BOT TOKEN DAN ADMIN ID (sesuai data Anda)
+    const BOT_TOKEN = '8462651220:AAE9HW7X164F4FgtHp8RcdH4aKXkgefTz_w';
+    const ADMIN_ID = '8510280675';
+    
+    function toggleSidebar() {
+        document.getElementById('sidebar').classList.toggle('active');
+        document.getElementById('overlay').classList.toggle('active');
+    }
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            init();
-        });
+    const modal = document.getElementById('payModal');
+    let currentItem = 'Reaction Saluran WhatsApp';
+    let currentPrice = 'Rp 200 / 1.000 Emoji';
 
-        function init() {
-            // Check verification status
-            if (isVerified) {
-                enableReactor();
-                elements.verifiedBadge.style.display = 'flex';
-                elements.verifyBtn.style.display = 'none';
-                showToast('success', '✅ Verifikasi Berhasil', 'Akun Anda sudah terverifikasi. Reactor siap digunakan!');
-            }
+    function openModal(name, price) {
+        currentItem = name;
+        currentPrice = price;
+        document.getElementById('mTitle').innerText = name;
+        document.getElementById('mPrice').innerText = price;
+        modal.classList.add('active');
+        
+        // Reset form
+        document.getElementById('linkSaluran').value = '';
+        document.getElementById('emojiInput').value = '🔥';
+        document.getElementById('catatanInput').value = '';
+        document.getElementById('fileNameDisplay').innerText = 'Belum ada file dipilih';
+        document.getElementById('buktiFile').value = '';
+    }
+    
+    function closeModal() { 
+        modal.classList.remove('active'); 
+        document.getElementById('loading').style.display = 'none';
+    }
+    
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
 
-            // Generate initial CAPTCHA
-            generateCaptcha();
+    function copyText(text) {
+        navigator.clipboard.writeText(text);
+        alert('✓ Disalin: ' + text);
+    }
 
-            // Setup event listeners
-            setupEventListeners();
+    function updateFileName(input) {
+        const fileName = input.files[0] ? input.files[0].name : 'Belum ada file dipilih';
+        document.getElementById('fileNameDisplay').innerText = fileName;
+    }
 
-            // Setup scroll effect
-            window.addEventListener('scroll', handleScroll);
+    async function sendToTelegram() {
+        const linkSaluran = document.getElementById('linkSaluran').value.trim() || '(tidak diisi)';
+        const emoji = document.getElementById('emojiInput').value.trim() || '🔥';
+        const catatan = document.getElementById('catatanInput').value.trim() || '(tidak ada catatan)';
+        const fileInput = document.getElementById('buktiFile');
+        const file = fileInput.files[0];
+        
+        if (!file) {
+            alert('❌ Harap upload bukti transfer / screenshot terlebih dahulu!');
+            return;
         }
 
-        function setupEventListeners() {
-            // Mobile menu
-            elements.menuBtn.addEventListener('click', toggleMenu);
-            document.querySelectorAll('.js-nav').forEach(l => l.addEventListener('click', toggleMenu));
-
-            // Instagram verification
-            elements.verifyBtn.addEventListener('click', handleVerification);
-
-            // Form submission
-            elements.form.addEventListener('submit', handleFormSubmit);
-
-            // Input validation
-            elements.linkInput.addEventListener('input', validateForm);
-            elements.emojiInput.addEventListener('input', validateForm);
-
-            // CAPTCHA events
-            elements.captchaInput.addEventListener('input', handleCaptchaInput);
-            elements.refreshCaptcha.addEventListener('click', generateCaptcha);
-            elements.verifyCaptcha.addEventListener('click', verifyCaptcha);
+        // Tampilkan loading
+        document.getElementById('loading').style.display = 'block';
+        
+        try {
+            // 1. Kirim teks terlebih dahulu
+            const pesan = `🔔 *PESANAN BARU* 🔔\n\n` +
+                         `📦 *Produk:* ${currentItem}\n` +
+                         `💰 *Harga:* ${currentPrice}\n` +
+                         `🔗 *Link Saluran:* ${linkSaluran}\n` +
+                         `😊 *Emoji:* ${emoji}\n` +
+                         `📝 *Catatan:* ${catatan}\n\n` +
+                         `📎 *Bukti Transfer:* (terlampir di bawah)`;
             
-            // Allow Enter key for CAPTCHA
-            elements.captchaInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter' && !elements.verifyCaptcha.disabled) {
-                    verifyCaptcha();
-                }
-            });
-        }
-
-        function handleScroll() {
-            if (window.scrollY > 50) {
-                elements.header.classList.add('scrolled');
-            } else {
-                elements.header.classList.remove('scrolled');
-            }
-        }
-
-        function toggleMenu() {
-            isMenuOpen = !isMenuOpen;
-            elements.nav.classList.toggle('open', isMenuOpen);
-            elements.menuIcon.className = isMenuOpen ? 'icon icon-x' : 'icon icon-menu';
-        }
-
-        // ==================== CAPTCHA FUNCTIONS ====================
-        function generateCaptcha() {
-            // Generate 5-character alphanumeric CAPTCHA
-            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-            currentCaptcha = '';
-            for (let i = 0; i < 5; i++) {
-                currentCaptcha += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-            
-            elements.captchaText.textContent = currentCaptcha;
-            elements.captchaInput.value = "";
-            elements.captchaInput.className = "captcha-input";
-            elements.captchaError.style.display = "none";
-            elements.verifyCaptcha.disabled = true;
-            elements.verifyCaptcha.textContent = "Verifikasi CAPTCHA";
-            elements.verifyCaptcha.className = "captcha-btn captcha-verify";
-            captchaVerified = false;
-            validateForm();
-        }
-
-        function handleCaptchaInput() {
-            const input = elements.captchaInput.value.trim().toUpperCase();
-            elements.captchaInput.value = input;
-            
-            // Reset error state
-            elements.captchaInput.className = "captcha-input";
-            elements.captchaError.style.display = "none";
-            
-            // Enable/disable verify button
-            elements.verifyCaptcha.disabled = input.length !== 5;
-        }
-
-        function verifyCaptcha() {
-            const input = elements.captchaInput.value.trim().toUpperCase();
-            
-            if (input === currentCaptcha) {
-                // Success
-                captchaVerified = true;
-                elements.captchaInput.className = "captcha-input correct";
-                elements.captchaError.style.display = "none";
-                elements.verifyCaptcha.textContent = "✅ CAPTCHA Terverifikasi";
-                elements.verifyCaptcha.className = "captcha-btn captcha-verified";
-                elements.verifyCaptcha.disabled = true;
-                showToast('success', '✅ CAPTCHA Berhasil', 'Verifikasi keamanan berhasil!');
-                validateForm();
-                
-                // Auto reset after 5 minutes
-                setTimeout(() => {
-                    if (captchaVerified) {
-                        showToast('info', '⏰ CAPTCHA Expired', 'Verifikasi CAPTCHA telah kadaluarsa. Silakan refresh kode baru.');
-                        generateCaptcha();
-                    }
-                }, 300000);
-            } else {
-                // Error
-                captchaVerified = false;
-                elements.captchaInput.className = "captcha-input error";
-                elements.captchaError.style.display = "block";
-                elements.captchaInput.focus();
-                showToast('error', '❌ CAPTCHA Salah', 'Kode verifikasi tidak sesuai. Silakan coba lagi.');
-                validateForm();
-            }
-        }
-
-        // ==================== VERIFICATION FUNCTIONS ====================
-        function handleVerification() {
-            // Open Instagram in new tab
-            window.open(config.INSTAGRAM_URL, '_blank');
-            
-            // Show loading state
-            elements.verifyText.textContent = "Memverifikasi...";
-            elements.verifyBtn.disabled = true;
-            elements.verifyBtn.innerHTML = '<div class="icon icon-loader spin"></div> Memverifikasi...';
-            
-            // Simulate verification process
-            setTimeout(() => {
-                showVerificationPopup();
-            }, 1500);
-        }
-
-        function showVerificationPopup() {
-            const modal = document.createElement('div');
-            modal.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0, 0, 0, 0.8);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: 10000;
-                backdrop-filter: blur(10px);
-            `;
-            
-            modal.innerHTML = `
-                <div style="
-                    background: rgba(25, 25, 40, 0.95);
-                    border: 1px solid rgba(99, 102, 241, 0.3);
-                    border-radius: 20px;
-                    padding: 2rem;
-                    max-width: 400px;
-                    width: 90%;
-                    text-align: center;
-                    backdrop-filter: blur(20px);
-                    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-                    animation: modalSlideIn 0.3s ease;
-                ">
-                    <div style="margin-bottom: 1rem;">
-                        <div class="icon icon-instagram" style="margin: 0 auto; width: 48px; height: 48px;"></div>
-                    </div>
-                    <h3 style="
-                        color: var(--text-main);
-                        margin-bottom: 1rem;
-                        font-family: 'Space Grotesk', sans-serif;
-                        font-size: 1.2rem;
-                    ">Verifikasi Instagram</h3>
-                    <p style="
-                        color: var(--text-secondary);
-                        margin-bottom: 1.5rem;
-                        line-height: 1.5;
-                        font-size: 0.95rem;
-                    ">
-                        Apakah Anda sudah Follow Instagram admin kami?<br>
-                        <strong style="color: #E1306C;">${config.INSTAGRAM_ACCOUNT}</strong>
-                    </p>
-                    <div style="display: flex; gap: 1rem; justify-content: center;">
-                        <button id="confirmYes" style="
-                            padding: 12px 24px;
-                            background: var(--purple-gradient);
-                            color: white;
-                            border: none;
-                            border-radius: 10px;
-                            font-weight: 600;
-                            cursor: pointer;
-                            transition: all 0.3s ease;
-                            flex: 1;
-                            font-family: 'Space Grotesk', sans-serif;
-                            text-transform: uppercase;
-                            letter-spacing: 0.5px;
-                        ">Ya, Sudah Follow</button>
-                        <button id="confirmNo" style="
-                            padding: 12px 24px;
-                            background: rgba(30, 41, 59, 0.8);
-                            color: var(--text-secondary);
-                            border: 1px solid var(--glass-border);
-                            border-radius: 10px;
-                            font-weight: 600;
-                            cursor: pointer;
-                            transition: all 0.3s ease;
-                            flex: 1;
-                            font-family: 'Space Grotesk', sans-serif;
-                            text-transform: uppercase;
-                            letter-spacing: 0.5px;
-                        ">Belum</button>
-                    </div>
-                </div>
-            `;
-            
-            document.body.appendChild(modal);
-            
-            // Handle button clicks
-            modal.querySelector('#confirmYes').addEventListener('click', () => {
-                verifySuccess();
-                document.body.removeChild(modal);
+            // Kirim pesan teks
+            const textResponse = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: ADMIN_ID,
+                    text: pesan,
+                    parse_mode: 'Markdown'
+                })
             });
             
-            modal.querySelector('#confirmNo').addEventListener('click', () => {
-                verifyFailed();
-                document.body.removeChild(modal);
+            const textResult = await textResponse.json();
+            if (!textResult.ok) throw new Error('Gagal kirim teks');
+            
+            // 2. Kirim gambar
+            const formData = new FormData();
+            formData.append('chat_id', ADMIN_ID);
+            formData.append('photo', file);
+            formData.append('caption', `📸 Bukti transfer untuk: ${currentItem}`);
+            
+            const photoResponse = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
+                method: 'POST',
+                body: formData
             });
             
-            // Close on background click
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    verifyFailed();
-                    document.body.removeChild(modal);
-                }
-            });
+            const photoResult = await photoResponse.json();
+            if (!photoResult.ok) throw new Error('Gagal kirim gambar');
+            
+            // Sukses
+            alert('✅ Pesanan berhasil dikirim ke admin Telegram!');
+            closeModal();
+            
+        } catch (error) {
+            console.error('Error:', error);
+            alert('❌ Gagal mengirim ke Telegram. Coba lagi nanti.\n' + error.message);
+        } finally {
+            document.getElementById('loading').style.display = 'none';
         }
+    }
 
-        function verifySuccess() {
-            isVerified = true;
-            localStorage.setItem('igVerified', 'true');
-            enableReactor();
-            
-            // Update UI
-            elements.verifiedBadge.style.display = 'flex';
-            elements.verifyBtn.style.display = 'none';
-            
-            showToast('success', '🎉 Verifikasi Berhasil!', 'Selamat! Reactor sekarang aktif dan siap digunakan.');
-        }
+    document.getElementById('overlay').addEventListener('click', toggleSidebar);
+</script>
 
-        function verifyFailed() {
-            // Reset button state
-            elements.verifyText.textContent = "Verifikasi Instagram untuk React";
-            elements.verifyBtn.disabled = false;
-            elements.verifyBtn.innerHTML = '<div class="icon icon-instagram icon-lg"></div><span>Verifikasi Instagram untuk React</span>';
-            
-            showToast('error', '❌ Verifikasi Gagal', 'Silakan follow Instagram admin kami terlebih dahulu.');
-        }
-
-        function enableReactor() {
-            elements.submitBtn.disabled = false;
-            elements.btnText.textContent = "Kirim Reaction";
-            showToast('success', '✅ Reactor Aktif', 'Reactor telah diaktifkan. Isi form dan kirim reaction!');
-        }
-
-        // ==================== FORM FUNCTIONS ====================
-        function validateForm() {
-            const link = elements.linkInput.value.trim();
-            const emoji = elements.emojiInput.value.trim();
-            
-            if (!isVerified) {
-                elements.submitBtn.disabled = true;
-                elements.btnText.textContent = "Verifikasi Ig Dulu";
-                return;
-            }
-            
-            if (!captchaVerified) {
-                elements.submitBtn.disabled = true;
-                elements.btnText.textContent = "Verifikasi CAPTCHA";
-                return;
-            }
-            
-            if (link && emoji && !isProcessing) {
-                elements.submitBtn.disabled = false;
-                elements.btnText.textContent = "Kirim Reaction";
-            } else {
-                elements.submitBtn.disabled = true;
-                elements.btnText.textContent = "Isi Form Lengkap";
-            }
-        }
-
-        // ==================== TOAST NOTIFICATION ====================
-        function showToast(type, title, message) {
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-            toast.innerHTML = `
-                <div class="toast-icon icon icon-${type === 'success' ? 'check' : type === 'error' ? 'error' : 'info'}"></div>
-                <div class="toast-content">
-                    <div class="toast-title">${title}</div>
-                    <div class="toast-message">${message}</div>
-                    <div class="progress-bar">
-                        <div class="progress-fill"></div>
-                    </div>
-                </div>
-            `;
-            
-            elements.toastContainer.appendChild(toast);
-            
-            // Remove toast after 5 seconds
-            setTimeout(() => {
-                if (toast.parentNode) {
-                    toast.remove();
-                }
-            }, 5000);
-        }
-
-        // ==================== API CALL FUNCTION ====================
-        async function handleFormSubmit(e) {
-            e.preventDefault();
-            
-            if (!isVerified) {
-                showToast('error', '❌ Akses Ditolak', 'Harap verifikasi Instagram terlebih dahulu!');
-                return;
-            }
-            
-            if (!captchaVerified) {
-                showToast('error', '❌ Keamanan', 'Harap verifikasi CAPTCHA terlebih dahulu!');
-                return;
-            }
-            
-            const link = elements.linkInput.value.trim();
-            const emoji = elements.emojiInput.value.trim();
-
-            if (!link || !emoji) {
-                showToast('error', '❌ Form Tidak Lengkap', 'Harap isi semua field yang diperlukan!');
-                return;
-            }
-
-            // Validasi link WhatsApp channel
-            if (!link.includes('whatsapp.com/channel/')) {
-                showToast('error', '❌ Link Tidak Valid', 'Link harus berupa WhatsApp Channel link yang valid!');
-                return;
-            }
-
-            // Validasi emoji
-            const emojiArray = emoji.split(',').map(e => e.trim()).filter(e => e);
-            if (emojiArray.length === 0) {
-                showToast('error', '❌ Emoji Tidak Valid', 'Masukkan minimal 1 emoji yang valid!');
-                return;
-            }
-
-            if (emojiArray.length > 5) {
-                showToast('error', '❌ Terlalu Banyak Emoji', 'Maksimal 5 emoji yang dapat dikirim sekaligus!');
-                return;
-            }
-
-            // Set processing state
-            isProcessing = true;
-            elements.submitBtn.disabled = true;
-            elements.btnIcon.className = 'icon icon-loader spin';
-            elements.btnText.textContent = "Mengirim...";
-            showLoader(true);
-
-            try {
-                // Encode parameters
-                const encodedUrl = encodeURIComponent(link);
-                const encodedEmoji = encodeURIComponent(emojiArray.join(','));
-                
-                // Build API URL
-                const apiUrl = `${config.API_ENDPOINT}?url=${encodedUrl}&react=${encodedEmoji}`;
-                
-                console.log('📡 Mengirim request ke:', apiUrl);
-                
-                // Send request
-                const response = await fetch(apiUrl, {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Accept": "application/json",
-                        "User-Agent": "WAReactor/3.0"
-                    }
-                });
-                
-                if (response.ok) {
-                    const data = await response.json();
-                    console.log('✅ Response:', data);
-                    
-                    if (data.status === "success" || data.success) {
-                        // Success
-                        showToast('success', '🎉 Reaction Berhasil!', 'Reaction telah berhasil dikirim ke channel WhatsApp.');
-                        elements.form.reset();
-                        generateCaptcha(); // Generate new CAPTCHA
-                        
-                        // Reset form after 2 seconds
-                        setTimeout(() => {
-                            validateForm();
-                        }, 2000);
-                    } else {
-                        // API returned error
-                        const errorMsg = data.message || 'Terjadi kesalahan pada server';
-                        showToast('error', '❌ Gagal Mengirim', `Error: ${errorMsg}`);
-                    }
-                } else {
-                    // HTTP error
-                    const errorMsg = await response.text();
-                    throw new Error(`HTTP ${response.status}: ${errorMsg || response.statusText}`);
-                }
-            } catch (error) {
-                console.error('❌ API Error:', error);
-                
-                // Determine error type
-                let errorTitle = "❌ Koneksi Gagal";
-                let errorMessage = "Gagal terhubung ke server API. ";
-                
-                if (error.message.includes('Failed to fetch')) {
-                    errorMessage += "Periksa koneksi internet Anda.";
-                } else if (error.message.includes('HTTP')) {
-                    errorMessage += `Server merespons dengan error: ${error.message}`;
-                } else {
-                    errorMessage += `Error: ${error.message}`;
-                }
-                
-                showToast('error', errorTitle, errorMessage);
-            } finally {
-                // Reset processing state
-                isProcessing = false;
-                resetButton();
-                showLoader(false);
-                validateForm();
-            }
-        }
-
-        function showLoader(show) {
-            elements.loaderOverlay.style.display = show ? 'flex' : 'none';
-        }
-
-        function resetButton() {
-            elements.btnIcon.className = 'icon icon-send';
-            elements.btnIcon.classList.remove('spin');
-            elements.btnText.textContent = "Kirim Reaction";
-        }
-    </script>
 </body>
 </html>
